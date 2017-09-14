@@ -12,6 +12,7 @@ class InvoicesController extends Controller
         return view('invoices.index')
             ->with('invoices', Invoice::orderBy('date', 'desc')->paginate(5));
     }
+
     public function show(Invoice $invoice)
     {
         return view('invoices.show')
@@ -57,13 +58,13 @@ class InvoicesController extends Controller
 
     public function update(Request $request, Invoice $invoice)
     {
-        // $request->validate([
-        //     'address' => 'required',
-        //     'city' => 'required',
-        //     'date' => 'required',
-        //     'paid' => 'required',
-        //     'zip' => 'required',
-        // ]);
+        $request->validate([
+            'address' => 'required',
+            'city' => 'required',
+            'date' => 'required',
+            'paid' => 'required',
+            'zip' => 'required',
+        ]);
 
         $invoice->update([
             'address' => request('address'),
