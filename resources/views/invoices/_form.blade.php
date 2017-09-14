@@ -133,14 +133,46 @@
 </div>
 
 <div class="field is-horizontal">
-    <div class="field-label"></div>
+    <div class="field-label is-normal">
+        <label class="label">Line</label>
+    </div>
     <div class="field-body">
         <div class="field">
-            <div class="control">
-                <button class="button is-primary">
-                    {{ $buttonLabel }}
-                </button>
-            </div>
+            <p class="control is-expanded has-icons-left">
+                <input class="input" type="text" placeholder="Task" name="task">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field has-addons">
+            <p class="control">
+                <a class="button is-static">
+                    &euro;
+                </a>
+            </p>
+            <p class="control is-expanded has-icons-left has-icons-right">
+                <input class="input" type="number" step="0.01" placeholder="90,00" name="rate">
+            </p>
+        </div>
+        <div class="field">
+            <p class="control is-expanded has-icons-left has-icons-right">
+                <input class="input" type="number" step="0.01" placeholder="Time" name="time">
+            </p>
         </div>
     </div>
+</div>
+
+<div class="field is-grouped">
+    <div class="field-label"></div>
+    <p class="control">
+        <button class="button is-info" data-rel="addLineButton">
+            Add a Line
+        </button>
+    </p>
+    <p class="control">
+        <button type="submit" class="button is-primary">
+            {{ $buttonLabel }}
+        </button>
+    </p>
 </div>
