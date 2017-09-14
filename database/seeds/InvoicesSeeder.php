@@ -1,8 +1,9 @@
 <?php
 
+use App\Invoice;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class InvoicesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(InvoicesSeeder::class);
-        $this->call(LinesSeeder::class);
+        factory(Invoice::class, 50)->create();
     }
 }

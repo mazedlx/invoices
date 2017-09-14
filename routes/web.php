@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/invoices', 'InvoicesController@index')->name('invoices.index');
+Route::get('/invoices/create', 'InvoicesController@create')->name('invoices.create');
+Route::get('/invoices/{invoice}/edit', 'InvoicesController@edit')->name('invoices.edit');
+Route::get('/invoices/{invoice}', 'InvoicesController@show')->name('invoices.show');
+Route::patch('/invoices/{invoice}', 'InvoicesController@update')->name('invoices.update');
+Route::post('/invoices', 'InvoicesController@store')->name('invoices.store');
+
+Route::post('/lines', 'LinesController@store')->name('lines.store');
