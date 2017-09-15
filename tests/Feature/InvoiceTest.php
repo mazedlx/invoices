@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Line;
+use PDF;
 use App\Customer;
 use App\Invoice;
+use App\Line;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,8 +14,16 @@ class InvoiceTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
+    }
+
     /** @test */
-    function an_invoice_can_be_shown()
+    function invoices_can_be_shown()
     {
         $invoice = factory(Invoice::class)->create();
 
@@ -23,7 +33,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function an_invoice_can_be_created()
+    function invoices_can_be_created()
     {
         $invoice = factory(Invoice::class)->make();
 
@@ -32,7 +42,7 @@ class InvoiceTest extends TestCase
         $this->assertDatabaseHas('invoices', ['customer' => $invoice->customer]);
     }
 
-    function a_new_invoice_gets_the_next_invoice_number()
+    function new_invoices_get_the_next_incrementing_invoice_number()
     {
         $invoice = factory(Invoice::class)->make(['date' => '2017-05-03']);
 
@@ -60,7 +70,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function an_invoice_can_be_updated()
+    function invoices_can_be_updated()
     {
         $invoice = factory(Invoice::class)->create(['customer' => 'New Customer']);
 
@@ -73,7 +83,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function an_invoice_can_be_deleted()
+    function invoices_can_be_deleted()
     {
         $invoice = factory(Invoice::class)->create();
         $line = factory(Line::class, 3)->create(['invoice_id' => $invoice->id]);
@@ -81,5 +91,15 @@ class InvoiceTest extends TestCase
 
         $this->assertDatabaseMissing('invoices', ['id' => $invoice->id]);
         $this->assertDatabaseMissing('lines', ['invoice_id' => $invoice->id]);
+    }
+
+    /** @test */
+    function invoices_can_be_printed()
+    {
+        $invoice = factory(Invoice::class)->create();
+        $line = factory(Line::class, 3)->create(['invoice_id' => $invoice->id]);
+
+        $this->get('/invoices/' . $invoice->id . '/print')
+            ->assertStatus(200);
     }
 }

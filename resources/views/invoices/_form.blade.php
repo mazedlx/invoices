@@ -7,7 +7,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="date" name="date" placeholder="" value="{{ optional($invoice)->date ? $invoice->date->format('Y-m-d') : null }}">
+                <input class="input" type="date" name="date" placeholder="" value="{{ optional($invoice)->date ? $invoice->date->format('Y-m-d') : old('date') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -23,7 +23,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="customer" placeholder="Customer" value="{{ optional($invoice)->customer }}">
+                <input class="input" type="text" name="customer" placeholder="Customer" value="{{ optional($invoice)->customer ?: old('customer') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -39,7 +39,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="company" placeholder="Company" value="{{ optional($invoice)->company }}">
+                <input class="input" type="text" name="company" placeholder="Company" value="{{ optional($invoice)->company ?: old('company') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -55,7 +55,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="address" placeholder="Address" value="{{ optional($invoice)->address }}">
+                <input class="input" type="text" name="address" placeholder="Address" value="{{ optional($invoice)->address ?: old('address') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -71,7 +71,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="zip" placeholder="Zip" value="{{ optional($invoice)->zip }}">
+                <input class="input" type="text" name="zip" placeholder="Zip" value="{{ optional($invoice)->zip ?: old('zip') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -87,7 +87,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="city" placeholder="City" value="{{ optional($invoice)->city }}">
+                <input class="input" type="text" name="city" placeholder="City" value="{{ optional($invoice)->city ?: old('zip') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -103,7 +103,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="country" placeholder="Country" value="{{ optional($invoice)->country }}">
+                <input class="input" type="text" name="country" placeholder="Country" value="{{ optional($invoice)->country ?: old('country') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>

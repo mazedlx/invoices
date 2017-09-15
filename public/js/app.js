@@ -762,11 +762,25 @@ module.exports = __webpack_require__(39);
 
 __webpack_require__(9);
 
-document.querySelector('[data-rel="add-line-button"]').addEventListener('click', function () {
-  var container = document.querySelector('[class="lines-container"]');
-  var line = document.querySelector('[data-rel="line"]').cloneNode(true);
-  container.appendChild(line);
-});
+var lineButton = document.querySelector('[data-rel="add-line-button"]');
+var closeButton = document.querySelector('[class="modal-close is-large"]');
+var flashModal = document.querySelector('[class="modal is-active"]');
+
+if (lineButton) {
+    lineButton.addEventListener('click', function () {
+        var container = document.querySelector('[class="lines-container"]');
+        var line = document.querySelector('[data-rel="line"]').cloneNode(true);
+        container.appendChild(line);
+    });
+}
+if (closeButton) {
+    closeButton.addEventListener('click', function () {
+        flashModal.classList.remove('is-active');
+    });
+    window.addEventListener('keydown', function (e) {
+        flashModal.classList.remove('is-active');
+    });
+}
 
 /***/ }),
 /* 9 */

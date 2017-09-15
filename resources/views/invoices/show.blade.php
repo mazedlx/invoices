@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{ route('invoices.delete', $invoice) }}" method="POST">
+<form action="{{ route('invoices.destroy', $invoice) }}" method="POST">
     <a class="button is-info" href="{{ route('invoices.edit', $invoice) }}">Edit</a>
 <a class="button is-primary" href="{{ route('invoices.print', $invoice) }}">Print</a>
     {{ csrf_field() }}

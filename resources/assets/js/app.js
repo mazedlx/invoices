@@ -7,8 +7,22 @@
 
 require('./bootstrap');
 
-document.querySelector(`[data-rel="add-line-button"]`).addEventListener('click', function () {
-    const container = document.querySelector(`[class="lines-container"]`);
-    const line = document.querySelector(`[data-rel="line"]`).cloneNode(true);
-    container.appendChild(line);
-});
+const lineButton = document.querySelector(`[data-rel="add-line-button"]`)
+const closeButton = document.querySelector(`[class="modal-close is-large"]`);
+const flashModal = document.querySelector(`[class="modal is-active"]`);
+
+if (lineButton) {
+    lineButton.addEventListener('click', function () {
+        const container = document.querySelector(`[class="lines-container"]`);
+        const line = document.querySelector(`[data-rel="line"]`).cloneNode(true);
+        container.appendChild(line);
+    });
+}
+if (closeButton) {
+    closeButton.addEventListener('click', function () {
+        flashModal.classList.remove('is-active');
+    });
+    window.addEventListener('keydown', function (e) {
+        flashModal.classList.remove('is-active');
+    });
+}
