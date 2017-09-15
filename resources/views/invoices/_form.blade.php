@@ -131,7 +131,8 @@
         </div>
     </div>
 </div>
-
+@if (optional($invoice)->lines)
+@forelse ($invoice->lines as $line)
 <div class="field is-horizontal">
     <div class="field-label is-normal">
         <label class="label">Line</label>
@@ -139,7 +140,7 @@
     <div class="field-body">
         <div class="field">
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" placeholder="Task" name="task">
+                <input class="input" type="text" placeholder="Task" name="tasks[]" value="{{ $line->task }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -152,13 +153,48 @@
                 </a>
             </p>
             <p class="control is-expanded has-icons-left has-icons-right">
-                <input class="input" type="number" step="0.01" placeholder="90,00" name="rate">
+                <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="{{ $line->rateAsFloat }}">
             </p>
         </div>
         <div class="field">
             <p class="control is-expanded has-icons-left has-icons-right">
-                <input class="input" type="number" step="0.01" placeholder="Time" name="time">
+                <input class="input" type="number" step="0.01" placeholder="Time" name="times[]" value="{{ $line->timeAsFloat }}">
             </p>
+        </div>
+    </div>
+</div>
+@empty
+@endforelse
+@endif
+<div class="lines-container">
+    <div class="field is-horizontal" data-rel="line">
+        <div class="field-label is-normal">
+            <label class="label">Line</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    <input class="input" type="text" placeholder="Task" name="tasks[]">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-user"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field has-addons">
+                <p class="control">
+                    <a class="button is-static">
+                        &euro;
+                    </a>
+                </p>
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="90.00">
+                </p>
+            </div>
+            <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input" type="number" step="0.01" placeholder="Time" name="times[]">
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -166,7 +202,7 @@
 <div class="field is-grouped">
     <div class="field-label"></div>
     <p class="control">
-        <button class="button is-info" data-rel="addLineButton">
+        <button type="button" class="button is-info" data-rel="add-line-button">
             Add a Line
         </button>
     </p>

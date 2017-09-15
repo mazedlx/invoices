@@ -19,3 +19,5 @@ Route::patch('/invoices/{invoice}', 'InvoicesController@update')->name('invoices
 Route::post('/invoices', 'InvoicesController@store')->name('invoices.store');
 
 Route::post('/lines', 'LinesController@store')->name('lines.store');
+
+Route::get('/invoices/{invoice}/print', 'PrintController@index')->name('invoices.print');

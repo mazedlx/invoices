@@ -179,6 +179,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\MacroServiceProvider::class,
+
         Barryvdh\DomPDF\ServiceProvider::class,
 
     ],

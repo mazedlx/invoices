@@ -23,7 +23,6 @@
     </section>
 
     @include('layouts.nav')
-
     <section class="section">
         <div class="container">
             @yield('content')

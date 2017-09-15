@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
+use App\Line;
 use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
@@ -27,9 +28,12 @@ class InvoicesController extends Controller
             'date' => 'required',
             'paid' => 'required',
             'zip' => 'required',
+            'rates.*' => 'sometimes|numeric',
+            'times.*' => 'sometimes|numeric',
+            'tasks.*' => 'sometimes|string',
         ]);
 
-        Invoice::create([
+        $invoice = Invoice::create([
             'address' => request('address'),
             'city' => request('city'),
             'company' => request('company'),
@@ -40,6 +44,8 @@ class InvoicesController extends Controller
             'paid' => request('paid'),
             'zip' => request('zip'),
         ]);
+
+        $invoice->lines()->saveMany(Line::transpose($request));
 
         return redirect('/invoices');
     }
@@ -64,6 +70,9 @@ class InvoicesController extends Controller
             'date' => 'required',
             'paid' => 'required',
             'zip' => 'required',
+            'rates.*' => 'sometimes|numeric',
+            'times.*' => 'sometimes|numeric',
+            'tasks.*' => 'sometimes|string',
         ]);
 
         $invoice->update([
@@ -76,6 +85,10 @@ class InvoicesController extends Controller
             'paid' => request('paid'),
             'zip' => request('zip'),
         ]);
+
+        $invoice->lines->each->delete();
+
+
 
         return redirect('/invoices/' . $invoice->id);
     }
