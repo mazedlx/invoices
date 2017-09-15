@@ -51,7 +51,9 @@ class Line extends Model
             'tasks',
             'rates',
             'times'
-        ]))->transpose()->map(function ($line) {
+        ]))->transpose()->filter(function($line) {
+            return $line[0] && $line[1] && $line[2];
+        })->map(function ($line) {
             return new self([
                 'task' => $line[0],
                 'rate' => $line[1] * 100,

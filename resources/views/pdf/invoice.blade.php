@@ -48,6 +48,7 @@
             }
 
             .footer {
+                width: 100%;
                 font-size: 0.75em;
             }
 
@@ -124,7 +125,6 @@
                         </tr>
                     </tfoot>
                 </table>
-                <br>
                 Steuerbefreit – Kleinunternehmer gemäß &sect;6(1)27 UStG<br>
                 Wir danken f&uuml;r Ihren Auftrag!<br>
                 <br>

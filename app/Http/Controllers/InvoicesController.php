@@ -28,9 +28,6 @@ class InvoicesController extends Controller
             'date' => 'required',
             'paid' => 'required',
             'zip' => 'required',
-            'rates.*' => 'sometimes|numeric',
-            'times.*' => 'sometimes|numeric',
-            'tasks.*' => 'sometimes|string',
         ]);
 
         $invoice = Invoice::create([
@@ -70,9 +67,6 @@ class InvoicesController extends Controller
             'date' => 'required',
             'paid' => 'required',
             'zip' => 'required',
-            'rates.*' => 'sometimes|numeric',
-            'times.*' => 'sometimes|numeric',
-            'tasks.*' => 'sometimes|string',
         ]);
 
         $invoice->update([
@@ -88,7 +82,7 @@ class InvoicesController extends Controller
 
         $invoice->lines->each->delete();
 
-
+        $invoice->lines()->saveMany(Line::transpose($request));
 
         return redirect('/invoices/' . $invoice->id);
     }
