@@ -198,7 +198,7 @@
         </div>
     </div>
 </div>
-
+<hr>
 <div class="field is-grouped">
     <div class="field-label"></div>
     <p class="control">

@@ -11,6 +11,7 @@
 |
 */
 
+Route::delete('/invoices/{invoice}', 'InvoicesController@delete')->name('invoices.delete');
 Route::get('/invoices', 'InvoicesController@index')->name('invoices.index');
 Route::get('/invoices/create', 'InvoicesController@create')->name('invoices.create');
 Route::get('/invoices/{invoice}/edit', 'InvoicesController@edit')->name('invoices.edit');

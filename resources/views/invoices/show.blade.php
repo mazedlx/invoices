@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<a class="button is-info" href="{{ route('invoices.edit', $invoice) }}">Edit</a>
+<form action="{{ route('invoices.delete', $invoice) }}" method="POST">
+    <a class="button is-info" href="{{ route('invoices.edit', $invoice) }}">Edit</a>
 <a class="button is-primary" href="{{ route('invoices.print', $invoice) }}">Print</a>
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    <button class="button is-default">Delete</button>
+</form>
 <hr>
 <div class="card">
     <div class="card-content">
         <div class="content">
             <h3>Invoice number: {{ $invoice->number }}</h3>
-            <h4>Recipient</h4>
             {!! $invoice->recipient !!}
             <br>
             Amount: {{ $invoice->amountInEuros }} &euro;<br>

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Line;
 use App\Customer;
 use App\Invoice;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -69,5 +70,16 @@ class InvoiceTest extends TestCase
         $this->patch('/invoices/' . $invoice->id, $changed);
 
         $this->assertDatabaseHas('invoices', ['id' => $invoice->id, 'customer' => 'Changed Customer']);
+    }
+
+    /** @test */
+    function an_invoice_can_be_deleted()
+    {
+        $invoice = factory(Invoice::class)->create();
+        $line = factory(Line::class, 3)->create(['invoice_id' => $invoice->id]);
+        $this->delete('/invoices/' . $invoice->id);
+
+        $this->assertDatabaseMissing('invoices', ['id' => $invoice->id]);
+        $this->assertDatabaseMissing('lines', ['invoice_id' => $invoice->id]);
     }
 }

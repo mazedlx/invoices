@@ -44,6 +44,8 @@ class InvoicesController extends Controller
 
         $invoice->lines()->saveMany(Line::transpose($request));
 
+        flash('Inovice created successfully!')->success();
+
         return redirect('/invoices');
     }
 
@@ -84,6 +86,18 @@ class InvoicesController extends Controller
 
         $invoice->lines()->saveMany(Line::transpose($request));
 
+        flash('Changes saved!')->success();
+
         return redirect('/invoices/' . $invoice->id);
+    }
+
+    public function delete(Invoice $invoice)
+    {
+        $invoice->lines->each->delete();
+        $invoice->delete();
+
+        flash('Inovice deleted!')->success();
+
+        return redirect('/invoices');
     }
 }

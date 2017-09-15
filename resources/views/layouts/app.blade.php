@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
+    @include('flash::message')
+
     <section class="hero is-info">
         <div class="hero-body">
             <div class="container">
