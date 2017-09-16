@@ -5,9 +5,12 @@
 
             @admin
             <a class="navbar-item is-tab" href="{{ route('invoices.create') }}">New</a>
-            <a class="navbar-item is-tab" href="{{ route('logout') }}"
+            <a class="navbar-item is-tab" href="{{ route('statistics.index') }}">Statistics</a>
+            <a class="navbar-item is-tab"
+                href="{{ route('logout') }}"
                 onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
+                         document.getElementById('logout-form').submit();"
+             >
                 Logout
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

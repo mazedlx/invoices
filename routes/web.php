@@ -13,9 +13,11 @@
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'InvoicesController@index');
-    Route::resource('/invoices', 'InvoicesController');
 
+    Route::resource('/invoices', 'InvoicesController');
     Route::get('/invoices/{invoice}/print', 'PrintController@index')->name('invoices.print');
+
+    Route::get('/statistics', 'StatisticsController@index')->name('statistics.index');
 });
 
 Auth::routes();

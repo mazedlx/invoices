@@ -41,6 +41,13 @@ class Invoice extends Model
         }), 2, ',', '.');
     }
 
+    public function getAmountAttribute()
+    {
+        return $this->lines->reduce(function ($amount, $line) {
+            return $amount + $line->amount / 10000;
+        });
+    }
+
     public function getDateFormattedAttribute()
     {
         return $this->date->format('d.m.Y');
@@ -59,5 +66,20 @@ class Invoice extends Model
     public function lines()
     {
         return $this->hasMany(Line::class);
+    }
+
+    public static function totalsByYear()
+    {
+        return Invoice::latest()->get()->mapWithKeys(function ($invoice) {
+            return [$invoice->date->format('Y-m-d') => $invoice->amount];
+        })->groupBy(function ($invoice, $key) {
+            return substr($key, 0, 4);
+        })->mapWithKeys(function ($year, $key) {
+            return [
+                $key => $year->reduce(function ($carry, $item) {
+                    return $carry + $item;
+                })
+            ];
+        })->toArray();
     }
 }

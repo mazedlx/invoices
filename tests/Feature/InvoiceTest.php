@@ -87,6 +87,7 @@ class InvoiceTest extends TestCase
     {
         $invoice = factory(Invoice::class)->create();
         $line = factory(Line::class, 3)->create(['invoice_id' => $invoice->id]);
+
         $this->delete('/invoices/' . $invoice->id);
 
         $this->assertDatabaseMissing('invoices', ['id' => $invoice->id]);

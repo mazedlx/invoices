@@ -52,8 +52,11 @@
                 font-size: 0.75em;
             }
 
-            table, tr, td, th {
+            .has-no-wrap {
                 white-space: nowrap;
+            }
+
+            table, tr, td, th {
                 width: 100%;
                 border-collapse: collapse;
                 padding: 0.45em;
@@ -102,26 +105,26 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Beschreibung</th>
-                            <th>Menge (h)</th>
-                            <th>&euro;/h</th>
-                            <th>Kosten</th>
+                            <th class="has-no-wrap">Beschreibung</th>
+                            <th class="has-no-wrap">Menge (h)</th>
+                            <th class="has-no-wrap">&euro;/h</th>
+                            <th class="has-no-wrap">Kosten</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($invoice->lines as $line)
                         <tr>
                             <td>{{ $line->task }}</td>
-                            <td>{{ $line->timeInHours }}</td>
-                            <td>{{ $line->rateInEuros }}</td>
-                            <td class="is-text-right">&euro; {{ $line->amountInEuros }}</td>
+                            <td class="has-no-wrap">{{ $line->timeInHours }}</td>
+                            <td class="has-no-wrap">{{ $line->rateInEuros }}</td>
+                            <td class="is-text-right has-no-wrap">&euro; {{ $line->amountInEuros }}</td>
                         </tr>
                     @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="3" class="is-text-right">Gesamt</th>
-                            <th class="is-text-right">&euro; {{ $invoice->amountInEuros }}</th>
+                            <th colspan="3" class="is-text-right has-no-wrap">Gesamt</th>
+                            <th class="is-text-right has-no-wrap">&euro; {{ $invoice->amountInEuros }}</th>
                         </tr>
                     </tfoot>
                 </table>

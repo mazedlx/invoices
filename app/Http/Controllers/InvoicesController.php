@@ -91,7 +91,7 @@ class InvoicesController extends Controller
         return redirect('/invoices/' . $invoice->id);
     }
 
-    public function delete(Invoice $invoice)
+    public function destroy(Invoice $invoice)
     {
         $invoice->lines->each->delete();
         $invoice->delete();
