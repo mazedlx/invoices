@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Customer;
 use App\Invoice;
 use App\Line;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,10 +21,10 @@ class InvoiceTest extends TestCase
 
         $this->assertEquals(
             implode('<br>', [
-                $invoice->company,
-                $invoice->customer,
-                $invoice->zip . ' ' . $invoice->city,
+                $invoice->company->name,
+                $invoice->customer->name,
                 $invoice->address,
+                $invoice->zip . ' ' . $invoice->city,
             ]), $recipient
         );
     }
@@ -66,6 +67,25 @@ class InvoiceTest extends TestCase
         $sixthInvoice = factory(Invoice::class)->create(['date' => '2017-10-23', 'number' => '2017-03']);
         factory(Line::class)->create(['invoice_id' => $sixthInvoice->id, 'rate' => 9000, 'time' => 100]);
 
-        $this->assertEquals((['2017' => 157.5, '2016' => 202.5]), Invoice::totalsByYear());
+        $this->assertEquals(['2017' => 157.5, '2016' => 202.5], Invoice::totalsByYear());
+    }
+
+    /** @test */
+    function invoices_can_rank_their_customers_by_amount()
+    {
+        $firstCustomer = factory(Customer::class)->create();
+        $secondCustomer = factory(Customer::class)->create();
+        $thirdCustomer = factory(Customer::class)->create();
+
+        $firstInvoice = factory(Invoice::class)->create(['customer_id' => $firstCustomer->id]);
+        factory(Line::class)->create(['invoice_id' => $firstInvoice->id, 'rate' => 9000, 'time' => 25]);
+        factory(Line::class)->create(['invoice_id' => $firstInvoice->id, 'rate' => 9000, 'time' => 75]);
+        $secondInvoice = factory(Invoice::class)->create(['customer_id' => $secondCustomer->id]);
+        factory(Line::class)->create(['invoice_id' => $secondInvoice->id, 'rate' => 9000, 'time' => 25]);
+        factory(Line::class)->create(['invoice_id' => $secondInvoice->id, 'rate' => 9000, 'time' => 25]);
+        $thirdInvoice = factory(Invoice::class)->create(['customer_id' => $thirdCustomer->id]);
+        factory(Line::class)->create(['invoice_id' => $thirdInvoice->id, 'rate' => 9000, 'time' => 75]);
+
+        $this->assertEquals([$firstCustomer->id => 90.0, $thirdCustomer->id => 67.50, $secondCustomer->id => 45.00], Invoice::rankedCustomers());
     }
 }

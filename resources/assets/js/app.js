@@ -13,11 +13,12 @@ const flashModal = document.querySelector(`[class="modal is-active"]`);
 
 if (lineButton) {
     lineButton.addEventListener('click', function () {
-        const container = document.querySelector(`[class="lines-container"]`);
+        const container = document.querySelector(`[id="lines-container"]`);
         const line = document.querySelector(`[data-rel="line"]`).cloneNode(true);
         container.appendChild(line);
     });
 }
+
 if (closeButton) {
     closeButton.addEventListener('click', function () {
         flashModal.classList.remove('is-active');

@@ -22,15 +22,17 @@ class Invoice extends Model
 
     protected $with = [
         'lines',
+        'customer',
+        'company',
     ];
 
     public function getRecipientAttribute()
     {
         return implode('<br>', [
-            $this->company,
-            $this->customer,
-            $this->zip . ' ' . $this->city,
+            optional($this->company)->name,
+            optional($this->customer)->name,
             $this->address,
+            $this->zip . ' ' . $this->city,
         ]);
     }
 
@@ -53,6 +55,21 @@ class Invoice extends Model
         return $this->date->format('d.m.Y');
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function lines()
+    {
+        return $this->hasMany(Line::class);
+    }
+
     public static function generateNumber($date)
     {
         $date = Carbon::createFromFormat(strlen($date) == 10 ? 'Y-m-d' : 'Y-m-d H:i:s', $date);
@@ -61,11 +78,6 @@ class Invoice extends Model
             $date->startOfYear()->format('Y-m-d H:i:s'),
             $date->endOfYear()->format('Y-m-d H:i:s')
         ])->count() + 1, 2, '0', STR_PAD_LEFT);
-    }
-
-    public function lines()
-    {
-        return $this->hasMany(Line::class);
     }
 
     public static function totalsByYear()
@@ -81,5 +93,41 @@ class Invoice extends Model
                 })
             ];
         })->toArray();
+    }
+
+    public static function rankedCustomers()
+    {
+        return Invoice::get()
+            ->filter(function ($invoice) {
+                return $invoice->customer_id !== null;
+            })->groupBy(function ($invoice) {
+                return $invoice->customer_id;
+            })->mapWithKeys(function ($customer_id, $key) {
+                return [
+                    $key => $customer_id->reduce(function ($carry, $invoice) {
+                        return $carry + $invoice->amount;
+                    })
+                ];
+            })->sortByDesc(function ($amount, $customer_id) {
+                return $amount;
+            })->toArray();
+    }
+
+    public static function rankedCompanies()
+    {
+        return Invoice::get()
+            ->filter(function ($invoice) {
+                return $invoice->company_id !== null;
+            })->groupBy(function ($invoice) {
+                return $invoice->company_id;
+            })->mapWithKeys(function ($company_id, $key) {
+                return [
+                    $key => $company_id->reduce(function ($carry, $invoice) {
+                        return $carry + $invoice->amount;
+                    })
+                ];
+            })->sortByDesc(function ($amount, $company_id) {
+                return $amount;
+            })->toArray();
     }
 }

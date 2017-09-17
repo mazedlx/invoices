@@ -22,8 +22,8 @@
                     </a>
                 </td>
                 <td>{{ $invoice->dateFormatted }}</td>
-                <td>{{ $invoice->customer }}</td>
-                <td>{{ $invoice->company }}</td>
+                <td>{{ optional($invoice->customer)->name }}</td>
+                <td>{{ optional($invoice->company)->name }}</td>
                 <td class="has-text-right">&euro; {{ $invoice->amountInEuros }}</td>
             </tr>
     @empty

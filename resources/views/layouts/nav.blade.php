@@ -1,12 +1,40 @@
-<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
     <div class="container">
-        <div class="navbar-tabs">
-            <a class="navbar-item is-tab" href="{{ route('invoices.index') }}">Invoices</a>
-
+        <div class="navbar">
             @admin
-            <a class="navbar-item is-tab" href="{{ route('invoices.create') }}">New</a>
-            <a class="navbar-item is-tab" href="{{ route('statistics.index') }}">Statistics</a>
-            <a class="navbar-item is-tab"
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Invoices
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{{ route('invoices.create') }}">New Invoice</a>
+                    <a class="navbar-item" href="{{ route('invoices.index') }}">All Invoices</a>
+                </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Customers
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{{ route('customers.create') }}">New Customer</a>
+                    <a class="navbar-item" href="{{ route('customers.index') }}">All Customers</a>
+                </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Companies
+                </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{{ route('companies.create') }}">New Company</a>
+                    <a class="navbar-item" href="{{ route('companies.index') }}">All Companies</a>
+                </div>
+            </div>
+
+            <a class="navbar-item" href="{{ route('statistics.index') }}">Statistics</a>
+
+            <a class="navbar-item"
                 href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();"

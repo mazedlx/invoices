@@ -93,8 +93,8 @@
             <div class="main">
                 <h1>Rechnung</h1>
                 <div class="address">
-                    {{ $invoice->company }}<br>
-                    {{ $invoice->customer }}<br>
+                    {{ optional($invoice->company)->name }}<br>
+                    {{ optional($invoice->customer)->name }}<br>
                     {{ $invoice->address }}<br>
                     {{ $invoice->zip }} {{ $invoice->city }}<br>
                     {{ $invoice->country }}

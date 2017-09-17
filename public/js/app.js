@@ -768,11 +768,12 @@ var flashModal = document.querySelector('[class="modal is-active"]');
 
 if (lineButton) {
     lineButton.addEventListener('click', function () {
-        var container = document.querySelector('[class="lines-container"]');
+        var container = document.querySelector('[id="lines-container"]');
         var line = document.querySelector('[data-rel="line"]').cloneNode(true);
         container.appendChild(line);
     });
 }
+
 if (closeButton) {
     closeButton.addEventListener('click', function () {
         flashModal.classList.remove('is-active');

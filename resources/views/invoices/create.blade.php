@@ -3,7 +3,11 @@
 @section('content')
 <h1 class="title">New Invoice</h1>
 @include('layouts.errors')
-<form method="POST" action="{{ route('invoices.store') }}">
-    @include('invoices._form', ['buttonLabel' => 'Create invoice'])
-</form>
+<div class="columns">
+    <div class="column is-two-thirds">
+        <form method="POST" action="{{ route('invoices.store') }}">
+            @include('invoices._form', ['invoice' => null, 'buttonLabel' => 'Create invoice'])
+        </form>
+    </div>
+</div>
 @stop

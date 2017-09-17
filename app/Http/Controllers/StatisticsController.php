@@ -10,6 +10,8 @@ class StatisticsController extends Controller
     public function index()
     {
         return view('statistics.index')
-            ->with('totals', Invoice::totalsByYear());
+            ->with('totals', Invoice::totalsByYear())
+            ->with('rankedCustomers', Invoice::rankedCustomers())
+            ->with('rankedCompanies', Invoice::rankedCompanies());
     }
 }

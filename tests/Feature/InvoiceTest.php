@@ -39,7 +39,7 @@ class InvoiceTest extends TestCase
 
         $this->post('/invoices', $invoice->toArray());
 
-        $this->assertDatabaseHas('invoices', ['customer' => $invoice->customer]);
+        $this->assertDatabaseHas('invoices', ['customer_id' => $invoice->customer->id]);
     }
 
     function new_invoices_get_the_next_incrementing_invoice_number()
@@ -72,14 +72,14 @@ class InvoiceTest extends TestCase
     /** @test */
     function invoices_can_be_updated()
     {
-        $invoice = factory(Invoice::class)->create(['customer' => 'New Customer']);
+        $invoice = factory(Invoice::class)->create(['address' => 'New address']);
 
         $changed = $invoice->toArray();
-        $changed['customer'] = 'Changed Customer';
+        $changed['address'] = 'Changed address';
 
         $this->patch('/invoices/' . $invoice->id, $changed);
 
-        $this->assertDatabaseHas('invoices', ['id' => $invoice->id, 'customer' => 'Changed Customer']);
+        $this->assertDatabaseHas('invoices', ['id' => $invoice->id, 'address' => 'Changed address']);
     }
 
     /** @test */

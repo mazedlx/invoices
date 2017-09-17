@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\Customer;
 use App\Invoice;
 use App\Line;
 use Illuminate\Http\Request;
@@ -33,9 +35,9 @@ class InvoicesController extends Controller
         $invoice = Invoice::create([
             'address' => request('address'),
             'city' => request('city'),
-            'company' => request('company'),
+            'company_id' => request('company_id'),
             'country' => request('country'),
-            'customer' => request('customer'),
+            'customer_id' => request('customer_id'),
             'date' => request('date'),
             'number' => Invoice::generateNumber(request('date')),
             'paid' => request('paid'),
@@ -52,13 +54,16 @@ class InvoicesController extends Controller
     public function create()
     {
         return view('invoices.create')
-            ->with('invoice', null);
+            ->with('customers', Customer::orderBy('name')->get())
+            ->with('companies', Company::orderBy('name')->get());
     }
 
     public function edit(Invoice $invoice)
     {
         return view('invoices.edit')
-            ->with('invoice', $invoice);
+            ->with('invoice', $invoice)
+            ->with('customers', Customer::orderBy('name')->get())
+            ->with('companies', Company::orderBy('name')->get());
     }
 
     public function update(Request $request, Invoice $invoice)
@@ -74,9 +79,9 @@ class InvoicesController extends Controller
         $invoice->update([
             'address' => request('address'),
             'city' => request('city'),
-            'company' => request('company'),
+            'company_id' => request('company_id'),
             'country' => request('country'),
-            'customer' => request('customer'),
+            'customer_id' => request('customer_id'),
             'date' => request('date'),
             'paid' => request('paid'),
             'zip' => request('zip'),

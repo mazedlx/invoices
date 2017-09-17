@@ -1,16 +1,12 @@
 {{ csrf_field() }}
-
 <div class="field is-horizontal">
     <div class="field-label is-normal">
         <label class="label">Date</label>
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="date" name="date" placeholder="" value="{{ optional($invoice)->date ? $invoice->date->format('Y-m-d') : old('date') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
+            <p class="control is-expanded">
+                <input class="input" type="date" name="date" placeholder="" value="{{ optional($invoice)->date ? $invoice->date->format('Y-m-d') : old('date') }}" required>
             </p>
         </div>
     </div>
@@ -22,11 +18,21 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="customer" placeholder="Customer" value="{{ optional($invoice)->customer ?: old('customer') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
+            <p class="control is-expanded">
+                <div class="select is-fullwidth">
+                    <select name="customer_id"">
+                        <option value="">-</option>
+                        @foreach($customers as $customer)
+                            <option value="{{ $customer['id'] }}"
+                                @if ($invoice)
+                                {{ optional($invoice->customer)->id == $customer['id'] ? 'selected' : ''}}
+                                @endif
+                            >
+                                {{ $customer['name'] }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </p>
         </div>
     </div>
@@ -38,11 +44,21 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="company" placeholder="Company" value="{{ optional($invoice)->company ?: old('company') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
+            <p class="control is-expanded">
+                <div class="select is-fullwidth">
+                    <select name="company_id"">
+                        <option value="">-</option>
+                        @foreach($companies as $company)
+                            <option value="{{ $company['id'] }}"
+                                @if ($invoice)
+                                    {{ optional($invoice->company)->id == $company['id'] ? 'selected' : '' }}
+                                @endif
+                            >
+                                {{ $company['name'] }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </p>
         </div>
     </div>
@@ -54,11 +70,8 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="address" placeholder="Address" value="{{ optional($invoice)->address ?: old('address') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
+            <p class="control is-expanded">
+                <input class="input" type="text" name="address" placeholder="Address" value="{{ optional($invoice)->address ?: old('address') }}" required>
             </p>
         </div>
     </div>
@@ -70,11 +83,8 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="zip" placeholder="Zip" value="{{ optional($invoice)->zip ?: old('zip') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
+            <p class="control is-expanded">
+                <input class="input" type="text" name="zip" placeholder="Zip" value="{{ optional($invoice)->zip ?: old('zip') }}" required>
             </p>
         </div>
     </div>
@@ -86,11 +96,8 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" name="city" placeholder="City" value="{{ optional($invoice)->city ?: old('zip') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
+            <p class="control is-expanded">
+                <input class="input" type="text" name="city" placeholder="City" value="{{ optional($invoice)->city ?: old('zip') }}" required>
             </p>
         </div>
     </div>
@@ -102,11 +109,8 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
+            <p class="control is-expanded">
                 <input class="input" type="text" name="country" placeholder="Country" value="{{ optional($invoice)->country ?: old('country') }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
             </p>
         </div>
     </div>
@@ -131,84 +135,94 @@
         </div>
     </div>
 </div>
+
 @if (optional($invoice)->lines)
-@forelse ($invoice->lines as $line)
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Line</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" placeholder="Task" name="tasks[]" value="{{ $line->task }}">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                </span>
-            </p>
+    @forelse ($invoice->lines as $line)
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Line</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control is-expanded">
+                        <input class="input" type="text" placeholder="Task" name="tasks[]" value="{{ $line->task }}">
+                    </p>
+                </div>
+
+                <div class="field has-addons">
+                    <p class="control is-expanded has-icons-left">
+                        <a class="button is-static">
+                            &euro;
+                        </a>
+                    </p>
+                    <p class="control has-icons-left">
+                        <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="{{ $line->rateAsFloat }}">
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control is-expanded">
+                        <input class="input" type="number" step="0.01" placeholder="Time" name="times[]" value="{{ $line->timeAsFloat }}">
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="field has-addons">
-            <p class="control">
-                <a class="button is-static">
-                    &euro;
-                </a>
-            </p>
-            <p class="control is-expanded has-icons-left has-icons-right">
-                <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="{{ $line->rateAsFloat }}">
-            </p>
-        </div>
-        <div class="field">
-            <p class="control is-expanded has-icons-left has-icons-right">
-                <input class="input" type="number" step="0.01" placeholder="Time" name="times[]" value="{{ $line->timeAsFloat }}">
-            </p>
-        </div>
-    </div>
-</div>
-@empty
-@endforelse
+    @empty
+    @endforelse
 @endif
-<div class="lines-container">
+
+<div class="field" id="lines-container">
     <div class="field is-horizontal" data-rel="line">
         <div class="field-label is-normal">
             <label class="label">Line</label>
         </div>
+
         <div class="field-body">
             <div class="field">
-                <p class="control is-expanded has-icons-left">
-                    <input class="input" type="text" placeholder="Task" name="tasks[]">
-                    <span class="icon is-small is-left">
-                        <i class="fa fa-user"></i>
-                    </span>
-                </p>
-            </div>
-            <div class="field has-addons">
                 <p class="control">
-                    <a class="button is-static">
-                        &euro;
-                    </a>
-                </p>
-                <p class="control is-expanded has-icons-left has-icons-right">
-                    <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="90.00">
+                    <input class="input" type="text" placeholder="Task" name="tasks[]">
                 </p>
             </div>
+
             <div class="field">
-                <p class="control is-expanded has-icons-left has-icons-right">
+                <div class="field has-addons">
+                    <p class="control">
+                        <a class="button is-static">
+                            &euro;
+                        </a>
+                    </p>
+                    <p class="control is-expanded">
+                        <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="90.00">
+                    </p>
+                </div>
+            </div>
+
+            <div class="field">
+                <p class="control is-expanded">
                     <input class="input" type="number" step="0.01" placeholder="Time" name="times[]">
                 </p>
             </div>
         </div>
     </div>
 </div>
-<hr>
-<div class="field is-grouped">
-    <div class="field-label"></div>
-    <p class="control">
-        <button type="button" class="button is-info" data-rel="add-line-button">
-            Add a Line
-        </button>
-    </p>
-    <p class="control">
-        <button type="submit" class="button is-primary">
-            {{ $buttonLabel }}
-        </button>
-    </p>
+
+<div class="field is-horizontal">
+    <div class="field-label is-normal">
+        <label class="label"></label>
+    </div>
+    <div class="field-body">
+        <div class="field is-grouped is-grouped-right">
+            <p class="control">
+                <button type="button" class="button is-info" data-rel="add-line-button">
+                    Add a Line
+                </button>
+            </p>
+
+            <p class="control">
+                <button type="submit" class="button is-primary">
+                    {{ $buttonLabel }}
+                </button>
+            </p>
+        </div>
+    </div>
 </div>
+
