@@ -19,7 +19,7 @@ class CreateLinesTable extends Migration
             $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->integer('rate');
             $table->integer('time');
-            $table->integer('task');
+            $table->string('task');
             $table->timestamps();
         });
     }

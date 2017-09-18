@@ -6,7 +6,7 @@
     </div>
     <div class="field-body">
         <div class="field">
-            <p class="control is-expanded has-icons-left">
+            <p class="control is-expanded">
                 <input class="input" type="text" name="name" placeholder="" value="{{ optional($company)->name ?: old('date') }}" required>
             </p>
         </div>
