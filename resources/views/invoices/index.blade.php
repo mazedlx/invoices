@@ -10,6 +10,7 @@
                 <th>Date</th>
                 <th>Customer</th>
                 <th>Company</th>
+                <th>Paid?</th>
                 <th>Amount</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{ $invoice->dateFormatted }}</td>
                 <td>{{ optional($invoice->customer)->name }}</td>
                 <td>{{ optional($invoice->company)->name }}</td>
+                <td>{{ $invoice->paid ? 'Yes' : 'No' }}</td>
                 <td class="has-text-right">&euro; {{ $invoice->amountInEuros }}</td>
             </tr>
     @empty
