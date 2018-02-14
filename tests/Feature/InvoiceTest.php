@@ -93,14 +93,4 @@ class InvoiceTest extends TestCase
         $this->assertDatabaseMissing('invoices', ['id' => $invoice->id]);
         $this->assertDatabaseMissing('lines', ['invoice_id' => $invoice->id]);
     }
-
-    /** @test */
-    function invoices_can_be_printed()
-    {
-        $invoice = factory(Invoice::class)->create();
-        $line = factory(Line::class, 3)->create(['invoice_id' => $invoice->id]);
-
-        $this->get('/invoices/' . $invoice->id . '/print')
-            ->assertStatus(200);
-    }
 }
