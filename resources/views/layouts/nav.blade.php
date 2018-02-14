@@ -9,6 +9,7 @@
                 <div class="navbar-dropdown">
                     <a class="navbar-item" href="{{ route('invoices.create') }}">New Invoice</a>
                     <a class="navbar-item" href="{{ route('invoices.index') }}">All Invoices</a>
+                    <a class="navbar-item" href="{{ route('invoices.unpaid') }}">Unpaid Invoices</a>
                 </div>
             </div>
 
@@ -53,4 +54,3 @@
         </div>
     </div>
 </nav>
-

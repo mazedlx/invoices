@@ -55,6 +55,11 @@ class Invoice extends Model
         return $this->date->format('d.m.Y');
     }
 
+    public function scopeUnpaid($query)
+    {
+        return $query->where('paid', '=', 0);
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

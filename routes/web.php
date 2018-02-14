@@ -13,6 +13,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/invoices/unpaid', 'UnpaidInvoicesController')->name('invoices.unpaid');
     Route::resource('/invoices', 'InvoicesController');
     Route::get('/invoices/{invoice}/print', 'PrintController@index')->name('invoices.print');
 
@@ -24,4 +25,3 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Auth::routes();
-
