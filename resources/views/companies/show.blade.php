@@ -16,7 +16,7 @@
         <tr>
             <td>{{ $invoice->number }}</td>
             <td>{{ $invoice->date->format('d.m.Y') }}</td>
-            <td>{{ $invoice->customer->name }}</td>
+            <td>{{ optional($invoice->custome)r->name }}</td>
             <td class="has-text-right">&euro; {{ $invoice->amountInEuros }}</td>
         </tr>
     @empty
