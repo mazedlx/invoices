@@ -13,6 +13,12 @@ class CompaniesController extends Controller
             ->with('companies', Company::orderBy('name')->paginate(5));
     }
 
+    public function show(Company $company)
+    {
+        return view('companies.show')
+            ->with('company', $company->load('invoices'));
+    }
+
     public function create()
     {
         return view('companies.create');
