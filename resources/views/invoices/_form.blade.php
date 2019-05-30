@@ -156,7 +156,7 @@
                         </a>
                     </p>
                     <p class="control has-icons-left">
-                        <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="{{ $line->rateAsFloat }}">
+                        <input class="input" type="number" step="0.01" placeholder="95,00" name="rates[]" value="{{ $line->rateAsFloat }}">
                     </p>
                 </div>
                 <div class="field">
@@ -191,7 +191,7 @@
                         </a>
                     </p>
                     <p class="control is-expanded">
-                        <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="90.00">
+                        <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="95.00">
                     </p>
                 </div>
             </div>
@@ -225,4 +225,3 @@
         </div>
     </div>
 </div>
-
