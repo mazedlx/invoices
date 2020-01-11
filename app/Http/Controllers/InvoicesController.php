@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
-use App\Customer;
-use App\Invoice;
 use App\Line;
+use App\Company;
+use App\Invoice;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
 {
     public function index()
     {
-        return view('invoices.index')
-            ->with('invoices', Invoice::orderBy('date', 'desc')->paginate(5));
+        return view('invoices.index', [
+            'invoices' => Invoice::orderBy('date', 'desc')->paginate(5),
+        ]);
     }
 
-    public function show(Invoice $invoice)
+    public function create()
     {
-        return view('invoices.show')
-            ->with('invoice', $invoice);
+        return view('invoices.create', [
+            'customers' => Customer::orderBy('name')->get(),
+            'companies' => Company::orderBy('name')->get(),
+        ]);
     }
 
     public function store(Request $request)
@@ -51,19 +54,20 @@ class InvoicesController extends Controller
         return redirect('/invoices');
     }
 
-    public function create()
+    public function show(Invoice $invoice)
     {
-        return view('invoices.create')
-            ->with('customers', Customer::orderBy('name')->get())
-            ->with('companies', Company::orderBy('name')->get());
+        return view('invoices.show', [
+            'invoice' => $invoice,
+        ]);
     }
 
     public function edit(Invoice $invoice)
     {
-        return view('invoices.edit')
-            ->with('invoice', $invoice)
-            ->with('customers', Customer::orderBy('name')->get())
-            ->with('companies', Company::orderBy('name')->get());
+        return view('invoices.edit', [
+            'invoice' => $invoice,
+            'customers' => Customer::orderBy('name')->get(),
+            'companies' => Company::orderBy('name')->get(),
+        ]);
     }
 
     public function update(Request $request, Invoice $invoice)
@@ -93,7 +97,7 @@ class InvoicesController extends Controller
 
         flash('Changes saved!')->success();
 
-        return redirect('/invoices/' . $invoice->id);
+        return redirect(route('invoices.show', $invoice));
     }
 
     public function destroy(Invoice $invoice)

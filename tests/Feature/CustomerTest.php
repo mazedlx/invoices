@@ -11,7 +11,7 @@ class CustomerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -20,7 +20,7 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function customers_can_be_shown()
+    public function customers_can_be_shown()
     {
         factory(Customer::class, 5)->create();
 
@@ -29,7 +29,7 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function customers_can_be_created()
+    public function customers_can_be_created()
     {
         $customer = factory(Customer::class)->make();
         $this->post('/customers', $customer->toArray());
@@ -38,7 +38,7 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function customers_can_be_updated()
+    public function customers_can_be_updated()
     {
         $customer = factory(Customer::class)->create();
         $changedCustomer = factory(Customer::class)->make(['name' => 'New Name']);

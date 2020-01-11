@@ -14,7 +14,7 @@ class InvoiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -23,7 +23,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function invoices_can_be_shown()
+    public function invoices_can_be_shown()
     {
         $invoice = factory(Invoice::class)->create();
 
@@ -33,7 +33,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function invoices_can_be_created()
+    public function invoices_can_be_created()
     {
         $invoice = factory(Invoice::class)->make();
 
@@ -42,7 +42,7 @@ class InvoiceTest extends TestCase
         $this->assertDatabaseHas('invoices', ['customer_id' => $invoice->customer->id]);
     }
 
-    function new_invoices_get_the_next_incrementing_invoice_number()
+    public function new_invoices_get_the_next_incrementing_invoice_number()
     {
         $invoice = factory(Invoice::class)->make(['date' => '2017-05-03']);
 
@@ -60,7 +60,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function all_invoices_can_be_shown()
+    public function all_invoices_can_be_shown()
     {
         $invoices = factory(Invoice::class, 5)->create();
 
@@ -70,7 +70,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function invoices_can_be_updated()
+    public function invoices_can_be_updated()
     {
         $invoice = factory(Invoice::class)->create(['address' => 'New address']);
 
@@ -83,7 +83,7 @@ class InvoiceTest extends TestCase
     }
 
     /** @test */
-    function invoices_can_be_deleted()
+    public function invoices_can_be_deleted()
     {
         $invoice = factory(Invoice::class)->create();
         $line = factory(Line::class, 3)->create(['invoice_id' => $invoice->id]);

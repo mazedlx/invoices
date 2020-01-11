@@ -1,7 +1,9 @@
-@if ($errors->any())
+<div class="flex">
+    @if ($errors->any())
     <ul>
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+        <li>{{ $error }}</li>
         @endforeach
     </ul>
-@endif
+    @endif
+</div>

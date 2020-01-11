@@ -11,7 +11,7 @@ class CompanyTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -20,7 +20,7 @@ class CompanyTest extends TestCase
     }
 
     /** @test */
-    function all_companies_can_be_shown()
+    public function all_companies_can_be_shown()
     {
         $this->withoutExceptionHandling();
 
@@ -31,7 +31,7 @@ class CompanyTest extends TestCase
     }
 
     /** @test */
-    function companies_can_be_created()
+    public function companies_can_be_created()
     {
         $company = factory(Company::class)->make();
 
@@ -41,7 +41,7 @@ class CompanyTest extends TestCase
     }
 
     /** @test */
-    function companies_can_be_updated()
+    public function companies_can_be_updated()
     {
         $this->withoutExceptionHandling();
 

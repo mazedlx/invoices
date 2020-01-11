@@ -1,56 +1,25 @@
-    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
-    <div class="container">
-        <div class="navbar">
-            @admin
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Invoices
-                </a>
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" href="{{ route('invoices.create') }}">New Invoice</a>
-                    <a class="navbar-item" href="{{ route('invoices.index') }}">All Invoices</a>
-                    <a class="navbar-item" href="{{ route('invoices.unpaid') }}">Unpaid Invoices</a>
-                </div>
-            </div>
+@auth
+<div class="flex items-start justify-around px-4 py-2 rounded-b-lg bg-gray-900 text-white mb-4">
+    <invoices-drop-down></invoices-drop-down>
+    <customers-drop-down></customers-drop-down>
+    <companies-drop-down></companies-drop-down>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Customers
-                </a>
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" href="{{ route('customers.create') }}">New Customer</a>
-                    <a class="navbar-item" href="{{ route('customers.index') }}">All Customers</a>
-                </div>
-            </div>
+    <a href=" {{ route('statistics.index') }}">Statistics</a>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Companies
-                </a>
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" href="{{ route('companies.create') }}">New Company</a>
-                    <a class="navbar-item" href="{{ route('companies.index') }}">All Companies</a>
-                </div>
-            </div>
-
-            <a class="navbar-item" href="{{ route('statistics.index') }}">Statistics</a>
-
-            <a class="navbar-item"
-                href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();"
-             >
-                Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-            @endadmin
-            <button class="button navbar-burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </div>
-</nav>
+    <a
+        href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();"
+    >
+        Logout
+    </a>
+    <form
+        id="logout-form"
+        action="{{ route('logout') }}"
+        method="POST"
+        style="display: none;"
+    >
+        {{ csrf_field() }}
+    </form>
+</div>
+@endauth
