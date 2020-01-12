@@ -1,227 +1,273 @@
 {{ csrf_field() }}
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Date</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <input class="input" type="date" name="date" placeholder="" value="{{ optional($invoice)->date ? $invoice->date->format('Y-m-d') : old('date') }}" required>
-            </p>
-        </div>
-    </div>
+
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="date"
+    >Date</label>
+    <input
+        class="form-input w-1/3"
+        type="date"
+        name="date"
+        placeholder="date"
+        value="{{ optional($invoice)->date ? $invoice->date->format('Y-m-d') : old('date') }}"
+        required
+    >
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Customer</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <div class="select is-fullwidth">
-                    <select name="customer_id"">
-                        <option value="">-</option>
-                        @foreach($customers as $customer)
-                            <option value="{{ $customer['id'] }}"
-                                @if ($invoice)
-                                {{ optional($invoice->customer)->id == $customer['id'] ? 'selected' : ''}}
-                                @endif
-                            >
-                                {{ $customer['name'] }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="customer"
+    >Customer</label>
+    <select
+        class="form-select w-1/3"
+        name="customer_id"
+    >
+        <option>-</option>
+        @foreach($customers as $customer)
+        <option
+            value="{{ $customer['id'] }}"
+            @if($invoice)
+            {{ optional($invoice->customer)->id == $customer['id'] ? 'selected' : ''}}
+            @endif
+        >
+            {{ $customer['name'] }}
+        </option>
+        @endforeach
+    </select>
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Company</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <div class="select is-fullwidth">
-                    <select name="company_id"">
-                        <option value="">-</option>
-                        @foreach($companies as $company)
-                            <option value="{{ $company['id'] }}"
-                                @if ($invoice)
-                                    {{ optional($invoice->company)->id == $company['id'] ? 'selected' : '' }}
-                                @endif
-                            >
-                                {{ $company['name'] }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="company"
+    >Company</label>
+    <select
+        class="form-select w-1/3"
+        name="company_id"
+    >
+        <option value="">-</option>
+        @foreach($companies as $company)
+        <option
+            value="{{ $company['id'] }}"
+            @if($invoice)
+            {{ optional($invoice->company)->id == $company['id'] ? 'selected' : '' }}
+            @endif
+        >
+            {{ $company['name'] }}
+        </option>
+        @endforeach
+    </select>
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Address</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <input class="input" type="text" name="address" placeholder="Address" value="{{ optional($invoice)->address ?: old('address') }}" required>
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="address"
+    >Address</label>
+    <input
+        class="form-input w-1/3"
+        type="text"
+        name="address"
+        placeholder="Address"
+        value="{{ optional($invoice)->address ?: old('address') }}"
+        required
+    >
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Zip</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <input class="input" type="text" name="zip" placeholder="Zip" value="{{ optional($invoice)->zip ?: old('zip') }}" required>
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="zip"
+    >Zip</label>
+    <input
+        class="form-input w-1/3"
+        type="text"
+        name="zip"
+        placeholder="Zip"
+        value="{{ optional($invoice)->zip ?: old('zip') }}"
+        required
+    >
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">City</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <input class="input" type="text" name="city" placeholder="City" value="{{ optional($invoice)->city ?: old('zip') }}" required>
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="city"
+    >City</label>
+    <input
+        class="form-input w-1/3"
+        type="text"
+        name="city"
+        placeholder="City"
+        value="{{ optional($invoice)->city ?: old('zip') }}"
+        required
+    >
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Country</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <input class="input" type="text" name="country" placeholder="Country" value="{{ optional($invoice)->country ?: old('country') }}">
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="country"
+    >Country</label>
+    <input
+        class="form-input w-1/3"
+        type="text"
+        name="country"
+        placeholder="Country"
+        value="{{ optional($invoice)->country ?: old('country') }}"
+    >
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label">
-        <label class="label">Paid?</label>
-    </div>
-    <div class="field-body">
-        <div class="field is-narrow">
-            <div class="control">
-                <label class="radio">
-                    <input type="radio" name="paid" value="1" {{ optional($invoice)->paid ? 'checked' : null }}>
-                    Yes
-                </label>
-                <label class="radio">
-                    <input type="radio" name="paid" value="0" {{ optional($invoice)->paid ? null : 'checked' }}>
-                    No
-                </label>
-            </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="paid"
+    >Paid?</label>
+    <div class="flex items-center justify-between w-1/3">
+        <div class="flex items-center justify-start w-1/2">
+            <input
+                class="form-radio"
+                type="radio"
+                name="paid"
+                value="1"
+                {{ optional($invoice)->paid ? 'checked' : null }}
+            >
+            <span class="ml-2">Yes</span>
+        </div>
+        <div class="flex items-center justify-start w-1/2">
+            <input
+                class="form-radio"
+                type="radio"
+                name="paid"
+                value="0"
+                {{ optional($invoice)->paid ? null : 'checked' }}
+            >
+            <span class="ml-2">No</span>
         </div>
     </div>
 </div>
 
 @if (optional($invoice)->lines)
-    @forelse ($invoice->lines as $line)
-        <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label class="label">Line</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <p class="control is-expanded">
-                        <input class="input" type="text" placeholder="Task" name="tasks[]" value="{{ $line->task }}">
-                    </p>
-                </div>
-
-                <div class="field has-addons">
-                    <p class="control is-expanded has-icons-left">
-                        <a class="button is-static">
-                            &euro;
-                        </a>
-                    </p>
-                    <p class="control has-icons-left">
-                        <input class="input" type="number" step="0.01" placeholder="95,00" name="rates[]" value="{{ $line->rateAsFloat }}">
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control is-expanded">
-                        <input class="input" type="number" step="0.01" placeholder="Time" name="times[]" value="{{ $line->timeAsFloat }}">
-                    </p>
-                </div>
-            </div>
+@foreach ($invoice->lines as $line)
+<div class="flex items-center">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="tasks"
+    >Line {{ $loop->iteration }}</label>
+    <div class="flex">
+        <input
+            class="form-input w-2/3"
+            type="text"
+            placeholder="Task"
+            name="tasks[]"
+            value="{{ $line->task }}"
+        >
+        <div class="form-input border-r-0">
+            &euro;
         </div>
-    @empty
-    @endforelse
+
+        <input
+            class="form-input border-l-0 -ml-2 w-1/6"
+            type="number"
+            step="0.01"
+            placeholder="90,00"
+            name="rates[]"
+            value="{{ $line->rateAsFloat }}"
+        >
+        <input
+            class="form-input w-1/6"
+            type="number"
+            step="0.01"
+            placeholder="Time"
+            name="times[]"
+            value="{{ $line->timeAsFloat }}"
+        >
+    </div>
+</div>
+@endforeach
 @endif
 
-<div class="field" id="lines-container">
-    <div class="field is-horizontal" data-rel="line">
-        <div class="field-label is-normal">
-            <label class="label">Line</label>
+<div class="flex items-center">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="tasks"
+    >Tasks</label>
+    <div class="flex">
+        <input
+            class="form-input w-2/3"
+            type="text"
+            placeholder="Task"
+            name="tasks[]"
+        >
+        <div class="form-input border-r-0">
+            &euro;
         </div>
 
-        <div class="field-body">
-            <div class="field">
-                <p class="control">
-                    <input class="input" type="text" placeholder="Task" name="tasks[]">
-                </p>
-            </div>
-
-            <div class="field">
-                <div class="field has-addons">
-                    <p class="control">
-                        <a class="button is-static">
-                            &euro;
-                        </a>
-                    </p>
-                    <p class="control is-expanded">
-                        <input class="input" type="number" step="0.01" placeholder="90,00" name="rates[]" value="95.00">
-                    </p>
-                </div>
-            </div>
-
-            <div class="field">
-                <p class="control is-expanded">
-                    <input class="input" type="number" step="0.01" placeholder="Time" name="times[]">
-                </p>
-            </div>
-        </div>
+        <input
+            class="form-input border-l-0 -ml-2 w-1/6"
+            type="number"
+            step="0.01"
+            placeholder="90,00"
+            name="rates[]"
+            value="95.00"
+        >
+        <input
+            class="form-input w-1/6"
+            type="number"
+            step="0.01"
+            placeholder="Time"
+            name="times[]"
+        >
     </div>
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label"></label>
-    </div>
-    <div class="field-body">
-        <div class="field is-grouped is-grouped-right">
-            <p class="control">
-                <button type="button" class="button is-info" data-rel="add-line-button">
-                    Add a Line
-                </button>
-            </p>
-
-            <p class="control">
-                <button type="submit" class="button is-primary">
-                    {{ $buttonLabel }}
-                </button>
-            </p>
+@for($i = 0; $i <=
+    3;
+    $i++)
+    <div
+    class="flex items-center mt-2"
+>
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="tasks"
+    ></label>
+    <div class="flex">
+        <input
+            class="form-input w-2/3"
+            type="text"
+            placeholder="Task"
+            name="tasks[]"
+        >
+        <div class="form-input border-r-0">
+            &euro;
         </div>
+
+        <input
+            class="form-input border-l-0 -ml-2 w-1/6"
+            type="number"
+            step="0.01"
+            placeholder="90,00"
+            name="rates[]"
+            value="95.00"
+        >
+        <input
+            class="form-input w-1/6"
+            type="number"
+            step="0.01"
+            placeholder="Time"
+            name="times[]"
+        >
     </div>
-</div>
+    </div>
+    @endfor
+
+    <div class="flex justify-end mt-2">
+        <button
+            type="submit"
+            class="border border-gray-900 px-4 py-2 rounded-lg"
+        >
+            {{ $buttonLabel }}
+        </button>
+    </div>

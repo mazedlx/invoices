@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
-use Illuminate\Http\Request;
 
 class StatisticsController extends Controller
 {
     public function index()
     {
-        return view('statistics.index')
-            ->with('totals', Invoice::totalsByYear())
-            ->with('rankedCustomers', Invoice::rankedCustomers())
-            ->with('rankedCompanies', Invoice::rankedCompanies());
+        return view('statistics.index', [
+            'totals' => Invoice::totalsByYear(),
+            'rankedCustomers' => Invoice::rankedCustomers(),
+            'rankedCompanies' => Invoice::rankedCompanies(),
+        ]);
     }
 }

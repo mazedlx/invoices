@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Company;
-use App\Customer;
-use App\Line;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,7 +29,7 @@ class Invoice extends Model
             optional($this->company)->name,
             optional($this->customer)->name,
             $this->address,
-            $this->zip . ' ' . $this->city,
+            $this->zip.' '.$this->city,
         ]);
     }
 
@@ -79,15 +76,15 @@ class Invoice extends Model
     {
         $date = Carbon::createFromFormat(strlen($date) == 10 ? 'Y-m-d' : 'Y-m-d H:i:s', $date);
 
-        return $date->year . '-' . str_pad(Invoice::whereBetween('date', [
+        return $date->year.'-'.str_pad(self::whereBetween('date', [
             $date->startOfYear()->format('Y-m-d H:i:s'),
-            $date->endOfYear()->format('Y-m-d H:i:s')
+            $date->endOfYear()->format('Y-m-d H:i:s'),
         ])->count() + 1, 2, '0', STR_PAD_LEFT);
     }
 
     public static function totalsByYear()
     {
-        return Invoice::latest()->get()->mapWithKeys(function ($invoice) {
+        return self::latest()->get()->mapWithKeys(function ($invoice) {
             return [$invoice->date->format('Y-m-d') => $invoice->amount];
         })->groupBy(function ($invoice, $key) {
             return substr($key, 0, 4);
@@ -95,44 +92,22 @@ class Invoice extends Model
             return [
                 $key => $year->reduce(function ($carry, $item) {
                     return $carry + $item;
-                })
+                }),
             ];
         })->toArray();
     }
 
     public static function rankedCustomers()
     {
-        return Invoice::get()
-            ->filter(function ($invoice) {
-                return $invoice->customer_id !== null;
-            })->groupBy(function ($invoice) {
-                return $invoice->customer_id;
-            })->mapWithKeys(function ($customer_id, $key) {
-                return [
-                    $key => $customer_id->reduce(function ($carry, $invoice) {
-                        return $carry + $invoice->amount;
-                    })
-                ];
-            })->sortByDesc(function ($amount, $customer_id) {
-                return $amount;
-            })->toArray();
+        return Customer::all()->sortByDesc(function ($customer) {
+            return $customer->total;
+        });
     }
 
     public static function rankedCompanies()
     {
-        return Invoice::get()
-            ->filter(function ($invoice) {
-                return $invoice->company_id !== null;
-            })->groupBy(function ($invoice) {
-                return $invoice->company_id;
-            })->mapWithKeys(function ($company_id, $key) {
-                return [
-                    $key => $company_id->reduce(function ($carry, $invoice) {
-                        return $carry + $invoice->amount;
-                    })
-                ];
-            })->sortByDesc(function ($amount, $company_id) {
-                return $amount;
-            })->toArray();
+        return Company::all()->sortByDesc(function ($company) {
+            return $company->total;
+        });
     }
 }

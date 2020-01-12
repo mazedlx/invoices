@@ -1,53 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{ route('invoices.destroy', $invoice) }}" method="POST">
-    <a class="button is-info" href="{{ route('invoices.edit', $invoice) }}">Edit</a>
-<a class="button is-primary" href="{{ route('invoices.print', $invoice) }}">Print</a>
+<form
+    class="flex items-center"
+    action="{{ route('invoices.destroy', $invoice) }}"
+    method="POST"
+>
+    <a
+        class="border border-gray-900 px-2 py-1 rounded-lg mr-2"
+        href="{{ route('invoices.edit', $invoice) }}"
+    >Edit</a>
+    <a
+        class="border border-gray-900 px-2 py-1 rounded-lg mr-2"
+        href="{{ route('invoices.print', $invoice) }}"
+    >Print</a>
     {{ csrf_field() }}
     {{ method_field('DELETE') }}
-    <button class="button is-default">Delete</button>
+    <button class="">Delete</button>
 </form>
-<hr>
-<div class="card">
-    <div class="card-content">
-        <div class="content">
-            <h3>Invoice number: {{ $invoice->number }}</h3>
-            {!! $invoice->recipient !!}
-            <br>
-            Amount: {{ $invoice->amountInEuros }} &euro;<br>
-            Date: {{ $invoice->dateFormatted }}
-        </div>
+
+<div>
+    <div class="flex items-baseline">
+        Nr. <div class="text-3xl font-semibold font-mono">{{ $invoice->number }}</div>
     </div>
+    <div class="text-xl text-gray-600">{{ $invoice->dateFormatted }}</div>
+    <div class="text-sm">{{ $invoice->paid ? 'Bezahlt' : 'Nicht bezahlt' }}</div>
+    <div class="border border-gray-900 px-2 py-2 w-1/3 rounded-lg my-2">{!! $invoice->recipient !!}</div>
 </div>
-<hr>
-<table class="table">
+
+<table class="border rounded">
     <thead>
         <tr>
-            <th>Task</th>
-            <th>Time</th>
-            <th>Rate</th>
-            <th>Amount</th>
+            <th class="border px-4 py-2">Task</th>
+            <th class="border px-4 py-2">Time</th>
+            <th class="border px-4 py-2">Rate</th>
+            <th class="border px-4 py-2">Amount</th>
         </tr>
     </thead>
     <tbody>
         @forelse ($invoice->lines as $line)
-            <tr>
-                <td>{{ $line->task }}</td>
-                <td>{{ $line->timeInHours }}</td>
-                <td>{{ $line->rateInEuros }}</td>
-                <td class="has-text-right">&euro; {{ $line->amountInEuros }}</td>
-            </tr>
+        <tr>
+            <td class="border px-4 py-2">{{ $line->task }}</td>
+            <td class="border px-4 py-2">{{ $line->timeInHours }}</td>
+            <td class="border px-4 py-2">{{ $line->rateInEuros }}</td>
+            <td class="border px-4 py-2 text-right">&euro; {{ $line->amountInEuros }}</td>
+        </tr>
         @empty
-            <tr>
-                <td colspan="4">No lines for this invoice found.</td>
-            </tr>
+        <tr>
+            <td
+                class="border px-4 py-2"
+                colspan="4"
+            >No lines for this invoice found.</td>
+        </tr>
         @endforelse
     </tbody>
     <tfoot>
         <tr>
-            <th colspan="3" class="has-text-right">Total</th>
-            <th class="has-text-right">&euro; {{ $invoice->amountInEuros }}</th>
+            <th
+                colspan="3"
+                class="border px-4 py-2 text-right"
+            >Total</th>
+            <th class="border px-4 py-2 text-right">&euro; {{ $invoice->amountInEuros }}</th>
         </tr>
     </tfoot>
 </table>

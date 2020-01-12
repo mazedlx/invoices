@@ -28,9 +28,9 @@
             class="container mx-auto flex flex-col"
             id="app"
         >
-            @include('flash::message')
-
             @include('layouts.nav')
+
+            @include('flash::message')
 
             @yield('content')
         </div>

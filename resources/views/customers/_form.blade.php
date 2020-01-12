@@ -1,23 +1,25 @@
 {{ csrf_field() }}
 
-<div class="field is-horizontal">
-    <div class="field-label is-normal">
-        <label class="label">Name</label>
-    </div>
-    <div class="field-body">
-        <div class="field">
-            <p class="control is-expanded">
-                <input class="input" type="text" name="name" placeholder="" value="{{ optional($customer)->name ?: old('date') }}" required>
-            </p>
-        </div>
-    </div>
+<div class="flex items-center mb-2">
+    <label
+        class="w-1/6 font-semibold text-right mr-4"
+        for="name"
+    >Name</label>
+    <input
+        class="form-input w-1/3"
+        type="text"
+        name="name"
+        placeholder="Name"
+        value="{{ optional($customer)->name ?: old('name') }}"
+        required
+    >
 </div>
 
-<div class="field is-horizontal">
-    <div class="field-label"></div>
-    <p class="control">
-        <button type="submit" class="button is-primary">
-            {{ $buttonLabel }}
-        </button>
-    </p>
+<div class="flex justify-end mt-2">
+    <button
+        type="submit"
+        class="border border-gray-900 px-4 py-2 rounded-lg"
+    >
+        {{ $buttonLabel }}
+    </button>
 </div>

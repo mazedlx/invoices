@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Edit Invoice {{ $invoice->number }}</h1>
+
 @include('layouts.errors')
-<form method="POST" action="{{ route('invoices.update', $invoice) }}">
+<form
+    class="w-1/2 mx-auto"
+    method="POST"
+    action="{{ route('invoices.update', $invoice) }}"
+>
     {{ method_field('PATCH') }}
     @include('invoices._form', ['buttonLabel' => 'Save changes'])
 </form>

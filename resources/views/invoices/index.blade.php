@@ -17,7 +17,10 @@
             @forelse ($invoices as $invoice)
             <tr>
                 <td class="border px-4 py-2">
-                    <a href="{{ route('invoices.show', $invoice) }}">
+                    <a
+                        class="underline"
+                        href="{{ route('invoices.show', $invoice) }}"
+                    >
                         {{ $invoice->number }}
                     </a>
                 </td>
@@ -39,8 +42,6 @@
     </table>
     <div class="mt-2">
         {{ $invoices->links() }}
-
     </div>
-
 </div>
 @stop
