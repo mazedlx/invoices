@@ -1,40 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Unpaid Invoices</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Number</th>
-            <th>Date</th>
-            <th>Customer</th>
-            <th>Company</th>
-            <th>Paid?</th>
-            <th>Amount</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="flex flex-col items-center">
+    <table class="border rounded">
+        <thead>
+            <tr>
+                <th class="px-4 py-2 border">Number</th>
+                <th class="px-4 py-2 border">Date</th>
+                <th class="px-4 py-2 border">Customer</th>
+                <th class="px-4 py-2 border">Company</th>
+                <th class="px-4 py-2 border">Paid?</th>
+                <th class="px-4 py-2 border">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
         @forelse ($invoices as $invoice)
-        <tr>
-            <td>
-                <a href="{{ route('invoices.show', $invoice) }}">
-                    {{ $invoice->number }}
-                </a>
-            </td>
-            <td>{{ $invoice->dateFormatted }}</td>
-            <td>{{ optional($invoice->customer)->name }}</td>
-            <td>{{ optional($invoice->company)->name }}</td>
-            <td>{{ $invoice->paid ? 'Yes' : 'No' }}</td>
-            <td class="has-text-right">&euro; {{ $invoice->amountInEuros }}</td>
-        </tr>
+            <tr>
+                <td class="px-4 py-2 border">
+                    <a href="{{ route('invoices.show', $invoice) }}">
+                        {{ $invoice->number }}
+                    </a>
+                </td>
+                <td class="px-4 py-2 border">{{ $invoice->dateFormatted }}</td>
+                <td class="px-4 py-2 border">{{ optional($invoice->customer)->name }}</td>
+                <td class="px-4 py-2 border">{{ optional($invoice->company)->name }}</td>
+                <td class="px-4 py-2 border">{{ $invoice->paid ? 'Yes' : 'No' }}</td>
+                <td class="px-4 py-2 text-right border">&euro; {{ $invoice->amountInEuros }}</td>
+            </tr>
         @empty
-        <tr>
-            <td colspan="4">No invoices found.</td>
-        </tr>
+            <tr>
+                <td
+                    class="px-4 py-2 border"
+                    colspan="5"
+                >No invoices found.</td>
+            </tr>
         @endforelse
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 {{ $invoices->links() }}
 @stop
