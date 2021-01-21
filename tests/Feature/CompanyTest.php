@@ -11,45 +11,61 @@ class CompanyTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    /** @test */
+    public function guests_cannot_show_companies()
     {
-        parent::setUp();
+        $response = $this->get(route('companies.index'));
 
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
+        $response->assertRedirect(route('login'));
     }
 
     /** @test */
-    public function all_companies_can_be_shown()
+    public function users_can_view_companies()
     {
-        $this->withoutExceptionHandling();
+        $response = $this->actingAs(User::factory()->create())
+            ->get(route('companies.index'));
 
-        $company = factory(Company::class, 5)->create();
-
-        $this->get('/companies')
-            ->assertViewIs('companies.index', ['companies' => Company::orderBy('name')->paginate(5)]);
+        $response->assertOk();
     }
 
     /** @test */
-    public function companies_can_be_created()
+    public function users_can_create_companies()
     {
-        $company = factory(Company::class)->make();
+        $this->actingAs(User::factory()->create())
+            ->post(route('companies.store'), [
+                'name' => 'Acme Corp.',
+            ]);
 
-        $this->post('/companies', $company->toArray());
-
-        $this->assertDatabaseHas('companies', $company->toArray());
+        tap(Company::first(), function ($company) {
+            $this->assertSame('Acme Corp.', $company->name);
+        });
     }
 
     /** @test */
     public function companies_can_be_updated()
     {
-        $this->withoutExceptionHandling();
+        $company = Company::factory()->create(['name' => 'Old Corp.']);
 
-        $company = factory(Company::class)->create(['name' => 'New name']);
-        $changedCompany = factory(Company::class)->make(['name' => 'Changed Name']);
+        $this->actingAs(User::factory()->create())
+            ->patch(route('companies.update', $company), [
+                'name' => 'New Corp.',
+            ]);
 
-        $this->patch('/companies/' . $company->id, $changedCompany->toArray());
+        tap($company->fresh(), function ($company) {
+            $this->assertSame('New Corp.', $company->name);
+        });
+    }
 
-        $this->assertDatabaseHas('companies', ['name' => 'Changed Name']);
+    /** @test */
+    public function name_is_required()
+    {
+        $company = Company::factory()->create(['name' => 'Old Corp.']);
+
+        $response = $this->actingAs(User::factory()->create())
+            ->post(route('companies.store', $company), [
+                'name' => '',
+            ]);
+
+        $response->assertSessionHasErrors(['name']);
     }
 }

@@ -2,11 +2,11 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="date"
     >Date</label>
     <input
-        class="form-input w-1/3"
+        class="w-1/3 form-input"
         type="date"
         name="date"
         placeholder="date"
@@ -17,14 +17,14 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="customer"
     >Customer</label>
     <select
-        class="form-select w-1/3"
+        class="w-1/3 form-select"
         name="customer_id"
     >
-        <option>-</option>
+        <option value="">-</option>
         @foreach($customers as $customer)
         <option
             value="{{ $customer['id'] }}"
@@ -40,11 +40,11 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="company"
     >Company</label>
     <select
-        class="form-select w-1/3"
+        class="w-1/3 form-select"
         name="company_id"
     >
         <option value="">-</option>
@@ -63,11 +63,11 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="address"
     >Address</label>
     <input
-        class="form-input w-1/3"
+        class="w-1/3 form-input"
         type="text"
         name="address"
         placeholder="Address"
@@ -78,11 +78,11 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="zip"
     >Zip</label>
     <input
-        class="form-input w-1/3"
+        class="w-1/3 form-input"
         type="text"
         name="zip"
         placeholder="Zip"
@@ -93,11 +93,11 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="city"
     >City</label>
     <input
-        class="form-input w-1/3"
+        class="w-1/3 form-input"
         type="text"
         name="city"
         placeholder="City"
@@ -108,11 +108,11 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="country"
     >Country</label>
     <input
-        class="form-input w-1/3"
+        class="w-1/3 form-input"
         type="text"
         name="country"
         placeholder="Country"
@@ -122,7 +122,7 @@
 
 <div class="flex items-center mb-2">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="paid"
     >Paid?</label>
     <div class="flex items-center justify-between w-1/3">
@@ -153,23 +153,23 @@
 @foreach ($invoice->lines as $line)
 <div class="flex items-center">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="tasks"
     >Line {{ $loop->iteration }}</label>
     <div class="flex">
         <input
-            class="form-input w-2/3"
+            class="w-2/3 form-input"
             type="text"
             placeholder="Task"
             name="tasks[]"
             value="{{ $line->task }}"
         >
-        <div class="form-input border-r-0">
+        <div class="border-r-0 form-input">
             &euro;
         </div>
 
         <input
-            class="form-input border-l-0 -ml-2 w-1/6"
+            class="w-1/6 -ml-2 border-l-0 form-input"
             type="number"
             step="0.01"
             placeholder="90,00"
@@ -177,7 +177,7 @@
             value="{{ $line->rateAsFloat }}"
         >
         <input
-            class="form-input w-1/6"
+            class="w-1/6 form-input"
             type="number"
             step="0.01"
             placeholder="Time"
@@ -191,22 +191,22 @@
 
 <div class="flex items-center">
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="tasks"
     >Tasks</label>
     <div class="flex">
         <input
-            class="form-input w-2/3"
+            class="w-2/3 form-input"
             type="text"
             placeholder="Task"
             name="tasks[]"
         >
-        <div class="form-input border-r-0">
+        <div class="border-r-0 form-input">
             &euro;
         </div>
 
         <input
-            class="form-input border-l-0 -ml-2 w-1/6"
+            class="w-1/6 -ml-2 border-l-0 form-input"
             type="number"
             step="0.01"
             placeholder="90,00"
@@ -214,7 +214,7 @@
             value="95.00"
         >
         <input
-            class="form-input w-1/6"
+            class="w-1/6 form-input"
             type="number"
             step="0.01"
             placeholder="Time"
@@ -230,22 +230,22 @@
     class="flex items-center mt-2"
 >
     <label
-        class="w-1/6 font-semibold text-right mr-4"
+        class="w-1/6 mr-4 font-semibold text-right"
         for="tasks"
     ></label>
     <div class="flex">
         <input
-            class="form-input w-2/3"
+            class="w-2/3 form-input"
             type="text"
             placeholder="Task"
             name="tasks[]"
         >
-        <div class="form-input border-r-0">
+        <div class="border-r-0 form-input">
             &euro;
         </div>
 
         <input
-            class="form-input border-l-0 -ml-2 w-1/6"
+            class="w-1/6 -ml-2 border-l-0 form-input"
             type="number"
             step="0.01"
             placeholder="90,00"
@@ -253,7 +253,7 @@
             value="95.00"
         >
         <input
-            class="form-input w-1/6"
+            class="w-1/6 form-input"
             type="number"
             step="0.01"
             placeholder="Time"
@@ -266,7 +266,7 @@
     <div class="flex justify-end mt-2">
         <button
             type="submit"
-            class="border border-gray-900 px-4 py-2 rounded-lg"
+            class="px-4 py-2 border border-gray-900 rounded-lg"
         >
             {{ $buttonLabel }}
         </button>

@@ -1,16 +1,30 @@
 <?php
 
-Auth::routes();
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PrintController;
+use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\UnpaidInvoicesController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+Auth::routes([
+    'only' => 'login',
+]);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::redirect('/', 'invoices');
-    Route::get('invoices/unpaid', 'UnpaidInvoicesController')->name('invoices.unpaid');
-    Route::resource('invoices', 'InvoicesController');
-    Route::get('invoices/{invoice}/print', 'PrintController@index')->name('invoices.print');
 
-    Route::resource('customers', 'CustomersController');
+    Route::get('invoices/unpaid', UnpaidInvoicesController::class)->name('invoices.unpaid');
 
-    Route::resource('companies', 'CompaniesController');
+    Route::get('invoices/{invoice}/print', PrintController::class)->name('invoices.print');
 
-    Route::get('statistics', 'StatisticsController@index')->name('statistics.index');
+    Route::resource('invoices', InvoiceController::class);
+
+    Route::resource('customers', CustomerController::class);
+
+    Route::resource('companies', CompanyController::class);
+
+    Route::get('statistics', StatisticsController::class)->name('statistics.index');
 });

@@ -10,17 +10,19 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
+    "@tailwindcss/ui": "^0.7.2",
     "axios": "^0.18.0",
     "cross-env": "^5.0.1",
     "laravel-mix": "^1.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.20"
   },
   "dependencies": {
     "@tailwindcss/custom-forms": "^0.2.1",
-    "node": "^10.15.3",
-    "tailwindcss": "^1.1.4",
+    "node": "^10.23.0",
+    "tailwindcss": "^1.9.6",
     "tailwindcss-plugins": "^0.3.0",
-    "vue": "^2.6.11",
-    "ziggy": "tightenco/ziggy"
+    "vue": "^2.6.12",
+    "ziggy": "tightenco/ziggy",
+    "ziggy-js": "github:tightenco/ziggy"
   }
 }

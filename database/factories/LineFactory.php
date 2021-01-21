@@ -1,14 +1,30 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Line::class, function (Faker $faker) {
-    return [
-        'invoice_id' => function () {
-            return factory(App\Invoice::class)->create()->id;
-        },
-        'rate' => 9000,
-        'time' => $faker->randomNumber(2),
-        'task' => $faker->sentence,
-    ];
-});
+use App\Line;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class LineFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Line::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'rate' => 9000,
+            'time' => $this->faker->randomNumber(2),
+            'task' => $this->faker->sentence,
+        ];
+    }
+}

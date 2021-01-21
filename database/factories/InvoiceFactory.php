@@ -1,22 +1,34 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Invoice::class, function (Faker $faker) {
-    return [
-        'address' => $faker->streetName,
-        'city' => $faker->city,
-        'customer_id' => function () {
-            return factory(App\Customer::class)->create()->id;
-        },
-        'company_id' => function () {
-            return factory(App\Company::class)->create()->id;
-        },
-        'country' => $faker->country,
-        'date' => $faker->date('Y-m-d'),
-        'number' => $faker->randomNumber,
-        'paid' => $faker->boolean,
-        'zip' => $faker->postcode,
-    ];
-});
+use App\invoice;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+class InvoiceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = invoice::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'address' => $this->faker->streetName,
+            'city' => $this->faker->city,
+            'country' => $this->faker->country,
+            'date' => $this->faker->date('Y-m-d'),
+            'number' => $this->faker->unique()->randomNumber,
+            'paid' => $this->faker->boolean,
+            'zip' => $this->faker->postcode,
+        ];
+    }
+}

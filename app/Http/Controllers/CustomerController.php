@@ -5,18 +5,13 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 
-class CustomersController extends Controller
+class CustomerController extends Controller
 {
     public function index()
     {
-        return view('customers.index')
-            ->with('customers', Customer::orderBy('name')->paginate(5));
-    }
-
-    public function show(Customer $customer)
-    {
-        return view('customers.show')
-            ->with('customer', $customer->load('invoices'));
+        return view('customers.index', [
+            'customers' => Customer::orderBy('name')->paginate(5),
+        ]);
     }
 
     public function create()
@@ -26,7 +21,7 @@ class CustomersController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        request()->validate([
             'name' => 'required',
         ]);
 
@@ -34,21 +29,33 @@ class CustomersController extends Controller
 
         flash('Customer created successfully!')->success();
 
-        return redirect('/customers');
+        return redirect(route('customers.index'));
+    }
+
+    public function show(Customer $customer)
+    {
+        return view('customers.show', [
+            'customer' => $customer->load('invoices'),
+        ]);
     }
 
     public function edit(Customer $customer)
     {
-        return view('customers.edit')
-            ->with('customer', $customer);
+        return view('customers.edit', [
+            'customer' => $customer,
+        ]);
     }
 
     public function update(Request $request, Customer $customer)
     {
+        request()->validate([
+            'name' => 'required',
+        ]);
+
         $customer->update(['name' => request('name')]);
 
         flash('Changes saved!');
 
-        return redirect('/customers');
+        return redirect(route('customers.index'));
     }
 }

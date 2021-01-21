@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Line;
 use App\Company;
-use App\Invoice;
 use App\Customer;
+use App\Invoice;
+use App\Line;
 use Illuminate\Http\Request;
 
-class InvoicesController extends Controller
+class InvoiceController extends Controller
 {
     public function index()
     {
@@ -27,12 +27,18 @@ class InvoicesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        request()->validate([
             'address' => 'required',
             'city' => 'required',
-            'date' => 'required',
+            'date' => [
+                'required',
+                'date_format:Y-m-d',
+            ],
             'paid' => 'required',
             'zip' => 'required',
+            'customer_id' => [
+                'required_if:company_id,null',
+            ],
         ]);
 
         $invoice = Invoice::create([
@@ -51,7 +57,7 @@ class InvoicesController extends Controller
 
         flash('Inovice created successfully!')->success();
 
-        return redirect('/invoices');
+        return redirect(route('invoices.show', $invoice));
     }
 
     public function show(Invoice $invoice)
