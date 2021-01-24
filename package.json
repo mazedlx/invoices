@@ -11,19 +11,13 @@
   },
   "devDependencies": {
     "@tailwindcss/ui": "^0.7.2",
-    "axios": "^0.21.1",
     "cross-env": "^5.0.1",
-    "laravel-mix": "^1.0",
-    "lodash": "^4.17.20"
+    "laravel-mix": "^1.0"
   },
   "dependencies": {
     "@tailwindcss/custom-forms": "^0.2.1",
     "alpinejs": "^2.8.0",
-    "node": "^10.23.0",
     "tailwindcss": "^1.9.6",
-    "tailwindcss-plugins": "^0.3.0",
-    "vue": "^2.6.12",
-    "ziggy": "tightenco/ziggy",
-    "ziggy-js": "github:tightenco/ziggy"
+    "tailwindcss-plugins": "^0.3.0"
   }
 }
