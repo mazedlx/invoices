@@ -6,13 +6,12 @@
             for="date"
             class="w-1/6 mr-4 font-semibold text-right"
         >Date</label>
-        {{-- <input
+        <input
             wire:model="invoice.date"
             class="w-1/3 form-input"
             type="date"
             required
-        > --}}
-        <x-date-picker wire:model="date" id="date" />
+        >
     </div>
 
     <div class="flex items-center mb-2">

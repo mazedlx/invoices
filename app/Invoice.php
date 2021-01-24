@@ -15,11 +15,8 @@ class Invoice extends Model
     protected $casts = [
         'company_id' => 'integer',
         'customer_id' => 'integer',
+        'date' => 'datetime:Y-m-d',
         'paid' => 'boolean',
-    ];
-
-    protected $dates = [
-        'date',
     ];
 
     protected $with = [
