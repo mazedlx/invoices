@@ -13,6 +13,8 @@ class Invoice extends Model
     protected $guarded = [];
 
     protected $casts = [
+        'company_id' => 'integer',
+        'customer_id' => 'integer',
         'paid' => 'boolean',
     ];
 
@@ -21,9 +23,9 @@ class Invoice extends Model
     ];
 
     protected $with = [
-        'lines',
-        'customer',
         'company',
+        'customer',
+        'lines',
     ];
 
     public static function generateNumber($date)

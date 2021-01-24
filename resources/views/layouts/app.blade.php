@@ -18,6 +18,7 @@
             content="{{ csrf_token() }}"
         >
         @livewireStyles
+        @stack('styles')
     </head>
 
     <body>
@@ -33,6 +34,7 @@
             @yield('content')
         </div>
         @livewireScripts
+        @stack('scripts')
     </body>
 
 </html>
