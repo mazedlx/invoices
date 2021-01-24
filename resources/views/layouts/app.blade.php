@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta
@@ -12,7 +11,7 @@
             rel="stylesheet"
             href="{{ mix('/css/app.css') }}"
         >
-        @routes
+
         <script src="{{  mix('/js/manifest.js') }}" defer></script>
         <script src="{{  mix('/js/vendor.js') }}" defer></script>
         <script src="{{ mix('/js/app.js') }}" defer></script>
@@ -20,12 +19,14 @@
             name="csrf-token"
             content="{{ csrf_token() }}"
         >
+        @livewireStyles
     </head>
 
     <body>
         <div
-            class="container mx-auto flex flex-col"
-            id="app"
+            x-cloak
+            x-data="{}"
+            class="container flex flex-col mx-auto"
         >
             @include('layouts.nav')
 
@@ -33,6 +34,7 @@
 
             @yield('content')
         </div>
+        @livewireScripts
     </body>
 
 </html>

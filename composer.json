@@ -14,8 +14,8 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "^8.0",
         "laravel/helpers": "^1.1",
-        "tightenco/ziggy": "^0.8.1",
-        "laravel/ui": "^3.2"
+        "laravel/ui": "^3.2",
+        "livewire/livewire": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -1,8 +1,10 @@
 @auth
-<div class="flex items-start justify-around px-4 py-2 rounded-b-lg bg-gray-900 text-white mb-4">
-    <invoices-drop-down></invoices-drop-down>
-    <customers-drop-down></customers-drop-down>
-    <companies-drop-down></companies-drop-down>
+<div
+    class="flex items-start justify-around px-4 py-2 mb-4 text-white bg-gray-900 rounded-b-lg"
+>
+    <x-invoices-dropdown />
+    <x-customers-dropdown />
+    <x-companies-dropdown />
 
     <a href=" {{ route('statistics.index') }}">Statistics</a>
 
