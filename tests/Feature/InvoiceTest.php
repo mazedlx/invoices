@@ -7,6 +7,7 @@ use App\Invoice;
 use App\Line;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class InvoiceTest extends TestCase
@@ -33,29 +34,28 @@ class InvoiceTest extends TestCase
     /** @test */
     public function user_can_create_invoices()
     {
-        $this->actingAs(User::factory()->create())
-            ->post(route('invoices.store'), [
-                'address' => 'Larastreet 1',
-                'city' => 'Laraville',
-                'country' => 'USA',
-                'date' => '2020-03-01',
-                'number' => '2020-01',
-                'paid' => false,
-                'zip' => '12345',
-                'customer_id' => Customer::factory()->create()->id,
-                'tasks' => [
-                    'Task 1',
-                    'Task 2',
+        Livewire::actingAs(User::factory()->create())->test('invoices.create')->set([
+            'invoice.address' => 'Larastreet 1',
+            'invoice.city' => 'Laraville',
+            'invoice.country' => 'USA',
+            'invoice.date' => '2020-03-01',
+            'invoice.number' => '2020-01',
+            'invoice.paid' => false,
+            'invoice.zip' => '12345',
+            'invoice.customer_id' => Customer::factory()->create()->id,
+            'lines' => [
+                [
+                    'rate' => 95.00,
+                    'time' => 1.5,
+                    'task' => 'work',
                 ],
-                'rates' => [
-                    9500,
-                    8200,
+                [
+                    'rate' => 64.00,
+                    'time' => 2.5,
+                    'task' => 'stuff',
                 ],
-                'times' => [
-                    1,
-                    2,
-                ],
-            ]);
+            ],
+        ])->call('save');
 
         tap(Invoice::first(), function ($invoice) {
             $this->assertSame('2020-01', $invoice->number);

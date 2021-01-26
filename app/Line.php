@@ -31,7 +31,7 @@ class Line extends Model
 
     public function invoice()
     {
-        $this->belongsTo(Invoice::class);
+        return $this->belongsTo(Invoice::class);
     }
 
     public function getAmountAttribute()

@@ -18,7 +18,8 @@ class Create extends Component
         'invoice.company_id' => 'nullable',
         'invoice.customer_id' => 'nullable',
         'invoice.date' => 'date',
-        'invoice.nation' => 'nullable',
+        'invoice.country' => 'nullable',
+        'invoice.number' => 'required',
         'invoice.paid' => 'boolean',
         'invoice.zip' => 'required',
         'lines.*.rate' => 'numeric',
@@ -37,6 +38,14 @@ class Create extends Component
         $this->validate();
 
         $this->invoice->save();
+
+        $lines = collect($this->lines)->each(function ($line) {
+            $this->invoice->lines()->create([
+                'time' => $line['time'],
+                'task' => $line['task'],
+                'rate' => $line['rate'],
+            ]);
+        });
     }
 
     public function render()
