@@ -68,6 +68,18 @@ class InvoiceTest extends TestCase
             $this->assertTrue(Customer::first()->is($invoice->customer));
             $this->assertCount(2, $invoice->lines);
         });
+
+        tap(Line::find(1), function ($line) {
+            $this->assertSame('95', $line->rate);
+            $this->assertSame('1.5', $line->time);
+            $this->assertSame('work', $line->task);
+        });
+
+        tap(Line::find(2), function ($line) {
+            $this->assertSame('64', $line->rate);
+            $this->assertSame('2.5', $line->time);
+            $this->assertSame('stuff', $line->task);
+        });
     }
 
     /** @test */
