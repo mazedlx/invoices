@@ -10,6 +10,9 @@
             type="text"
             required
         >
+    @error('invoice.number')
+        <span class="text-red-500">{{ $message }}</span>
+    @enderror
     </div>
     <div class="flex items-center mb-2">
         <label
@@ -137,15 +140,15 @@
         </div>
     </div>
 
-    <x-invoice-lines />
+    <x-invoice-lines :lines="$lines"/>
 
     <div class="flex justify-end mt-2">
         <button
-            wire:click="save"
+            wire:click="update"
             type="button"
             class="px-4 py-2 border border-gray-900 rounded-lg"
         >
-            Create Invoice
+            Update Invoice
         </button>
     </div>
 </div>

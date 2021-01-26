@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Casts\Hundred;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -11,6 +12,11 @@ class Line extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'time' => Hundred::class,
+        'rate' => Hundred::class,
+    ];
 
     public static function transpose(Request $request)
     {
@@ -41,26 +47,26 @@ class Line extends Model
 
     public function getRateInEurosAttribute()
     {
-        return number_format($this->rate / 100, 2, ',', '.');
+        return number_format($this->rate, 2, ',', '.');
     }
 
     public function getRateAsFloatAttribute()
     {
-        return number_format($this->rate / 100, 2);
+        return number_format($this->rate, 2);
     }
 
     public function getAmountInEurosAttribute()
     {
-        return number_format($this->amount / 10000, 2, ',', '.');
+        return number_format($this->amount, 2, ',', '.');
     }
 
     public function getTimeInHoursAttribute()
     {
-        return number_format($this->time / 100, 2, ',', '.');
+        return number_format($this->time, 2, ',', '.');
     }
 
     public function getTimeAsFloatAttribute()
     {
-        return number_format($this->time / 100, 2);
+        return number_format($this->time, 2);
     }
 }

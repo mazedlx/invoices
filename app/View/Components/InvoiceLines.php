@@ -6,13 +6,16 @@ use Illuminate\View\Component;
 
 class InvoiceLines extends Component
 {
+    public array $lines;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($lines = [])
     {
+        $this->lines = $lines;
     }
 
     /**

@@ -2,13 +2,9 @@
 
 @section('content')
 
-@include('layouts.errors')
-<form
-    class="w-1/2 mx-auto"
-    method="POST"
-    action="{{ route('invoices.update', $invoice) }}"
->
-    {{ method_field('PATCH') }}
-    @include('invoices._form', ['buttonLabel' => 'Save changes'])
-</form>
-@stop
+    @include('layouts.errors')
+
+    <div class="w-2/3">
+        <livewire:invoices.edit :invoice="$invoice" />
+    </div>
+@endsection
