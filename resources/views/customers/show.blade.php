@@ -7,25 +7,31 @@
         <table class="border rounded">
             <thead>
                 <tr>
-                    <th class="border px-4 py-2">Number</th>
-                    <th class="border px-4 py-2">Date</th>
-                    <th class="border px-4 py-2">Company</th>
-                    <th class="border px-4 py-2">Amount</th>
+                    <th class="px-4 py-2 border">Number</th>
+                    <th class="px-4 py-2 border">Date</th>
+                    <th class="px-4 py-2 border">Company</th>
+                    <th class="px-4 py-2 border">Amount</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($customer->invoices as $invoice)
                 <tr>
-                    <td class="border px-4 py-2">{{ $invoice->number }}</td>
-                    <td class="border px-4 py-2">{{ $invoice->date->format('d.m.Y') }}</td>
-                    <td class="border px-4 py-2">{{ optional($invoice->company)->name ?? '-'  }}</td>
-                    <td class="border px-4 py-2 text-right">&euro; {{ $invoice->amountInEuros }}</td>
+                    <td class="px-4 py-2 border">{{ $invoice->number }}</td>
+                    <td class="px-4 py-2 border">{{ $invoice->date->format('d.m.Y') }}</td>
+                    <td class="px-4 py-2 border">{{ optional($invoice->company)->name ?? '-'  }}</td>
+                    <td class="px-4 py-2 text-right border">&euro; {{ $invoice->amountInEuros }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4">No invoices for this customer.</td>
+                    <td class="px-4 py-2 border" colspan="4">No invoices for this customer.</td>
                 </tr>
                 @endforelse
+                @if ($customer->invoices->count() > 0)
+                <tr>
+                    <td colspan="3" class="px-4 py-2 text-right border">Gesamt</td>
+                    <td class="px-4 py-2 text-right border">&euro; {{ $customer->totalInEuros }}</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

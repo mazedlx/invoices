@@ -45,9 +45,9 @@ class InvoiceTest extends TestCase
     public function invoices_can_calculate_their_amount()
     {
         $invoice = Invoice::factory()
-            ->has(Line::factory(['rate' => 9000, 'time' => 100]))
-            ->has(Line::factory(['rate' => 9000, 'time' => 50]))
-            ->has(Line::factory(['rate' => 9000, 'time' => 75]))
+            ->has(Line::factory(['rate' => 90.00, 'time' => 1.00]))
+            ->has(Line::factory(['rate' => 90.00, 'time' => .50]))
+            ->has(Line::factory(['rate' => 90.00, 'time' => .75]))
             ->create();
 
         $this->assertSame('202,50', $invoice->amountInEuros);

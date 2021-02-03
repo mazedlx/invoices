@@ -18,10 +18,15 @@ class Customer extends Model
 
     public function getTotalAttribute()
     {
-        return self::invoices()
+        return $this->invoices()
             ->get()
             ->reduce(function ($carry, $invoice) {
                 return $carry + ($invoice->amount * 100);
             });
+    }
+
+    public function getTotalInEurosAttribute()
+    {
+        return number_format($this->getTotalAttribute(), 2, ',', '.');
     }
 }
