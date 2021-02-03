@@ -21,7 +21,7 @@ class Customer extends Model
         return self::invoices()
             ->get()
             ->reduce(function ($carry, $invoice) {
-                return $carry + $invoice->amount;
+                return $carry + ($invoice->amount * 100);
             });
     }
 }

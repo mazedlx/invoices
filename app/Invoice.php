@@ -44,7 +44,7 @@ class Invoice extends Model
         })->mapWithKeys(function ($year, $key) {
             return [
                 $key => $year->reduce(function ($carry, $item) {
-                    return $carry + $item;
+                    return $carry + ($item * 100);
                 }),
             ];
         })->toArray();
@@ -97,14 +97,14 @@ class Invoice extends Model
     public function getAmountInEurosAttribute()
     {
         return number_format($this->lines->reduce(function ($amount, $line) {
-            return $amount + $line->amount / 10000;
+            return $amount + $line->amount;
         }), 2, ',', '.');
     }
 
     public function getAmountAttribute()
     {
         return $this->lines->reduce(function ($amount, $line) {
-            return $amount + $line->amount / 10000;
+            return $amount + $line->amount / 100;
         });
     }
 
