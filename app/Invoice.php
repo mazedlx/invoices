@@ -29,10 +29,12 @@ class Invoice extends Model
     {
         $date = Carbon::createFromFormat(10 === mb_strlen($date) ? 'Y-m-d' : 'Y-m-d H:i:s', $date);
 
-        return $date->year . '-' . str_pad(self::whereBetween('date', [
+        $number = (string) (self::whereBetween('date', [
             $date->startOfYear()->format('Y-m-d H:i:s'),
             $date->endOfYear()->format('Y-m-d H:i:s'),
-        ])->count() + 1, 2, '0', \STR_PAD_LEFT);
+        ])->count() + 1);
+
+        return $date->year . '-' . str_pad($number, 2, '0', \STR_PAD_LEFT);
     }
 
     public static function totalsByYear()
