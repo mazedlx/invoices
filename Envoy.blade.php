@@ -5,7 +5,7 @@
     git stash
     php artisan down
     git pull
-    composer install
+    composer install --no-dev
     npm install
     npm run prod
     php artisan optimize
