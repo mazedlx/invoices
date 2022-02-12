@@ -16,7 +16,9 @@ class CompanyController extends Controller
 
     public function create()
     {
-        return view('companies.create');
+        return view('companies.create', [
+            'company' => null,
+        ]);
     }
 
     public function store(Request $request)

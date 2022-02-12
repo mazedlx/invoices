@@ -5,7 +5,7 @@
     <x-slot:title>Companies</x-slot>
 
     <x-slot:action>
-        <a href="{{ route('customers.create') }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Create new company</a>
+        <a href="{{ route('companies.create') }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Create new company</a>
     </x-slot>
 </x-heading>
 @endsection

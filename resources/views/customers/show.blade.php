@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('heading')
+<x-heading>
+    <x-slot:title></x-slot>
+
+    <x-slot:action>
+        <a href="{{ route('customers.edit', $customer) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Edit</a>
+    </x-slot>
+</x-heading>
+@endsection
+
 @section('content')
 <div class="bg-white">
     <div class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:pb-24 lg:px-8">
