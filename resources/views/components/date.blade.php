@@ -1,0 +1,23 @@
+<div>
+    <div class="grid grid-cols-4 gap-6">
+        <div class="col-span-2 sm:col-span-2">
+            <label for="{{ $for }}" class="block text-sm font-medium @error($model) text-red-700 @else text-gray-700 @enderror">{{ $label }}</label>
+
+            <div class="flex mt-1 rounded-md shadow-sm">
+                <input
+                    wire:model="{{ $model }}"
+                    type="date"
+                    name="{{ $for }}"
+                    id="{{ $for }}"
+                    class="flex-1 block w-full @error($model) border-red-300  @else border-gray-300 @enderror rounded-md focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                >
+            </div>
+        </div>
+    </div>
+    @error($model)
+        <div class="flex items-center mt-1 space-x-2">
+            <x-heroicon-s-x-circle class="w-4 h-4 text-red-700" />
+            <span class="text-sm text-red-700">{{ $message }}</span>
+        </div>
+    @enderror
+</div>

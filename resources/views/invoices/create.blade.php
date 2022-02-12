@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
+@section('heading')
+<x-heading>
+    <x-slot:title>Create Invoice</x-slot>
+    <x-slot:action></x-slot>
+</x-heading>
+@endsection
+
 @section('content')
-
-    @include('layouts.errors')
-
-    <div class="w-2/3">
-        <livewire:invoices.create />
-    </div>
+    <livewire:invoices.create />
 @endsection
