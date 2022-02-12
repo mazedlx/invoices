@@ -11,4 +11,4 @@
         @include('customers._form', ['customer' => null, 'buttonLabel' => 'Create customer'])
     </form>
 </div>
-@stop
+@endsection

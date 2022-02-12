@@ -11,4 +11,4 @@
         @include('companies._form', ['company' => null, 'buttonLabel' => 'Create company'])
     </form>
 </div>
-@stop
+@endsection

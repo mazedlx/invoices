@@ -64,4 +64,4 @@
         </tr>
     </tfoot>
 </table>
-@stop
+@endsection

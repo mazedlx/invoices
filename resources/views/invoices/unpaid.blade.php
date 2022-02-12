@@ -39,4 +39,4 @@
     </table>
 </div>
 {{ $invoices->links() }}
-@stop
+@endsection
