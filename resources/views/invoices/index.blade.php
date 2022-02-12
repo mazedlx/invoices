@@ -1,22 +1,26 @@
 @extends('layouts.app')
 
+@section('heading')
+Invoices
+@endsection
+
 @section('content')
 <div class="flex flex-col items-center">
     <table class="border rounded">
         <thead>
             <tr>
-                <th class="border px-4 py-2">Number</th>
-                <th class="border px-4 py-2">Date</th>
-                <th class="border px-4 py-2">Customer</th>
-                <th class="border px-4 py-2">Company</th>
-                <th class="border px-4 py-2">Paid?</th>
-                <th class="border px-4 py-2">Amount</th>
+                <th class="px-4 py-2 border">Number</th>
+                <th class="px-4 py-2 border">Date</th>
+                <th class="px-4 py-2 border">Customer</th>
+                <th class="px-4 py-2 border">Company</th>
+                <th class="px-4 py-2 border">Paid?</th>
+                <th class="px-4 py-2 border">Amount</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($invoices as $invoice)
             <tr>
-                <td class="border px-4 py-2">
+                <td class="px-4 py-2 border">
                     <a
                         class="underline"
                         href="{{ route('invoices.show', $invoice) }}"
@@ -24,16 +28,16 @@
                         {{ $invoice->number }}
                     </a>
                 </td>
-                <td class="border px-4 py-2">{{ $invoice->dateFormatted }}</td>
-                <td class="border px-4 py-2">{{ optional($invoice->customer)->name }}</td>
-                <td class="border px-4 py-2">{{ optional($invoice->company)->name }}</td>
-                <td class="border px-4 py-2">{{ $invoice->paid ? 'Yes' : 'No' }}</td>
-                <td class="border px-4 py-2 text-right">&euro; {{ $invoice->amountInEuros }}</td>
+                <td class="px-4 py-2 border">{{ $invoice->dateFormatted }}</td>
+                <td class="px-4 py-2 border">{{ optional($invoice->customer)->name }}</td>
+                <td class="px-4 py-2 border">{{ optional($invoice->company)->name }}</td>
+                <td class="px-4 py-2 border">{{ $invoice->paid ? 'Yes' : 'No' }}</td>
+                <td class="px-4 py-2 text-right border">&euro; {{ $invoice->amountInEuros }}</td>
             </tr>
             @empty
             <tr>
                 <td
-                    class="border px-4 py-2"
+                    class="px-4 py-2 border"
                     colspan="4"
                 >No invoices found.</td>
             </tr>
