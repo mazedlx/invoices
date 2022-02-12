@@ -23,6 +23,7 @@
     <body
         x-data="{
             showSidebar: false,
+            showDropdown: false,
         }"
         x-cloak
         class="h-full"
