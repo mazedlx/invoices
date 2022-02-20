@@ -49,7 +49,7 @@
                             </td>
                             <td class="px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap">&euro; {{ $invoice->amount_in_euros }}</td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                <a href="{{ route('invoices.show', $invoice) }}" class="text-gray-600 hover:text-gray-900">Show</a>
+                                <a href="{{ route('invoices.show', $invoice) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                         </tr>
                         @else
@@ -67,7 +67,7 @@
                             </td>
                             <td class="px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap">&euro; {{ $invoice->amount_in_euros }}</td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                <a href="{{ route('invoices.show', $invoice) }}" class="text-gray-600 hover:text-gray-900">Show</a>
+                                <a href="{{ route('invoices.show', $invoice) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
                             </td>
                         </tr>
                         @endif
