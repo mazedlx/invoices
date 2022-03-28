@@ -99,7 +99,8 @@
             1220 Wien<br>
             Österreich<br>
             +43 660 456 3193<br>
-            christian@mazedlx.net</p>
+            <a href="https://mazedlx.net">https://mazedlx.net</a>
+        </p>
     </div>
     <div class="container">
         <div class="main">
