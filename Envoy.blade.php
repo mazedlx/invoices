@@ -1,4 +1,4 @@
-@servers(['alderaan' => ['maze@192.168.0.100']])
+@servers(['alderaan' => ['maze@192.168.1.2']])
 
 @task('deploy', ['on' => 'alderaan'])
     cd /var/www/html/invoices
