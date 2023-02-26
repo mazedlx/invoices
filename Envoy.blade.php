@@ -7,7 +7,7 @@
     git pull
     composer install --no-dev
     npm install
-    npm run prod
+    npm run build
     php artisan optimize
     php artisan up
 @endtask
