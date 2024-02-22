@@ -1,4 +1,4 @@
-@servers(['alderaan' => ['maze@192.168.1.2']])
+@servers(['alderaan' => ['maze@mazenet.ath.cx']])
 
 @task('deploy', ['on' => 'alderaan'])
     cd /var/www/html/invoices
@@ -7,7 +7,7 @@
     git pull
     composer install --no-dev
     npm install
-    npm run prod
+    npm run build
     php artisan optimize
     php artisan up
 @endtask
