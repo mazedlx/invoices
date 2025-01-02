@@ -1,6 +1,6 @@
-@servers(['alderaan' => ['maze@mazenet.ath.cx']])
+@servers(['main' => ['maze@main.mazedlx.net']])
 
-@task('deploy', ['on' => 'alderaan'])
+@task('deploy', ['on' => 'main'])
     cd /var/www/html/invoices
     git stash
     php artisan down

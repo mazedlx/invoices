@@ -87,7 +87,6 @@
         .is-text-right {
             text-align: right;
         }
-
     </style>
 </head>
 
@@ -95,7 +94,7 @@
     <div class="header">
         mazedlx.net webproductions<br>
         <p class="small">DI(FH) Christian Leo-Pernold<br>
-            Glockenblumengasse 36/6/2<br>
+            An der Neurisse 9/Haus 43<br>
             1220 Wien<br>
             Österreich<br>
             +43 660 456 3193<br>
