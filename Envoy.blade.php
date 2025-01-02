@@ -1,7 +1,7 @@
 @servers(['main' => ['maze@main.mazedlx.net']])
 
 @task('deploy', ['on' => 'main'])
-    cd /var/www/html/invoices
+    cd /var/www/html/invoices.mazedlx.net
     git stash
     php artisan down
     git pull
