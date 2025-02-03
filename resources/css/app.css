@@ -1,5 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-[x-cloak] { display: none; }
+@source "../views";
+
+@plugin "@tailwindcss/forms";
+
+[x-cloak] { display: none !important; }

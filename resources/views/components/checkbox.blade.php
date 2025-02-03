@@ -10,7 +10,7 @@
                             name="{{ $for }}"
                             type="checkbox"
                             value="{{ $value }}"
-                            class="w-4 h-4 text-gray-600 @error($model) border-red-300  @else border-gray-300 @enderror rounded focus:ring-gray-500">
+                            class="w-4 h-4 text-gray-600 @error($model) border-red-300  @else border-gray-300 @enderror rounded-sm focus:ring-gray-500">
                     </div>
                     <div class="ml-3 text-sm">
                         <label for="{{ $for }}" class="block text-sm font-medium @error($model) text-red-700 @else text-gray-700 @enderror">{{ $label }}</label>

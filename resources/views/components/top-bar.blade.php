@@ -1,10 +1,10 @@
 <div
-    class="sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow"
+    class="sticky top-0 z-10 flex shrink-0 h-16 bg-white shadow-sm"
 >
     <button
         @click="showSidebar = true"
         type="button"
-        class="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
+        class="px-4 text-gray-500 border-r border-gray-200 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
     >
         <span class="sr-only">Open sidebar</span>
         <x-heroicon-o-menu-alt-2 class="w-6 h-6" />
@@ -20,7 +20,7 @@
                 <div>
                     <button
                         @click="showDropdown = !showDropdown"
-                        type="button" class="flex items-center max-w-xs text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        type="button" class="flex items-center max-w-xs text-sm bg-white rounded-full focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         id="user-menu-button"
                         aria-expanded="false"
                         aria-haspopup="true"
@@ -32,7 +32,7 @@
 
                 <div
                     x-show="showDropdown"
-                    class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"

@@ -1,5 +1,5 @@
 <form action="#" method="POST">
-    <div class="shadow sm:rounded-md sm:overflow-hidden">
+    <div class="shadow-sm sm:rounded-md sm:overflow-hidden">
         <div class="px-4 py-5 space-y-6 bg-white sm:p-6">
             <x-input for="number" label="Number" model="invoice.number" />
             <x-date for="date" label="Date" model="invoice.date" />
@@ -30,9 +30,9 @@
             <div class="flex justify-end mt-2">
                 <div class="pt-5">
                     <div class="flex justify-end">
-                        <a href="{{ route('invoices.show', $invoice) }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Cancel</a>
+                        <a href="{{ route('invoices.show', $invoice) }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-xs hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Cancel</a>
 
-                        <button wire:click.prevent="update" type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Update</button>
+                        <button wire:click.prevent="update" type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-xs hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Update</button>
                     </div>
                 </div>
             </div>

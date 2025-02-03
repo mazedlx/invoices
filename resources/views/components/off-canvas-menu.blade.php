@@ -46,7 +46,7 @@
                 <button
                     @click="showSidebar = false"
                     type="button"
-                    class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
                 >
                     <span class="sr-only">Close sidebar</span>
                     <x-heroicon-o-x class="w-6 h-6 text-white" />
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="flex-shrink-0 w-14" aria-hidden="true">
+    <div class="shrink-0 w-14" aria-hidden="true">
     <!-- Dummy element to force sidebar to shrink to fit close icon -->
     </div>
 </div>

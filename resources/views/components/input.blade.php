@@ -3,7 +3,7 @@
         <div class="col-span-2 sm:col-span-2">
             <label for="{{ $for }}" class="block text-sm font-medium @error($model) text-red-700 @else text-gray-700 @enderror">{{ $label }}</label>
 
-            <div class="flex mt-1 rounded-md shadow-sm">
+            <div class="flex mt-1 rounded-md shadow-xs">
                 <input
                     wire:model.live="{{ $model }}"
                     type="text"
