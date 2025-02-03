@@ -5,7 +5,7 @@
 
             <div class="flex mt-1 rounded-md shadow-sm">
                 <input
-                    wire:model="{{ $model }}"
+                    wire:model.live="{{ $model }}"
                     type="text"
                     name="{{ $for }}"
                     id="{{ $for }}"

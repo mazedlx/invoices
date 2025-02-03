@@ -1,39 +1,28 @@
 <?php
 
-namespace App\Http\Livewire\Invoices;
+namespace App\Livewire\Invoices;
 
 use App\Company;
 use App\Customer;
 use App\Invoice;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 
-class Edit extends Component
+class Create extends Component
 {
     public Invoice $invoice;
     public array $lines;
 
-    public function mount(Invoice $invoice)
+    public function mount()
     {
-        $this->invoice = $invoice;
-        $this->lines = $invoice->lines->toArray();
+        $this->invoice = new Invoice(['paid' => false]);
+        $this->lines = [];
     }
 
-    public function render()
-    {
-        return view('livewire.invoices.edit', [
-            'customers' => Customer::all(),
-            'companies' => Company::all(),
-        ]);
-    }
-
-    public function update()
+    public function save()
     {
         $this->validate();
 
         $this->invoice->save();
-
-        $this->invoice->lines->each->delete();
 
         collect($this->lines)->each(function ($line) {
             $this->invoice->lines()->create([
@@ -43,9 +32,17 @@ class Edit extends Component
             ]);
         });
 
-        flash('Inovice updated successfully!')->success();
+        flash('Inovice created successfully!')->success();
 
         return redirect(route('invoices.show', $this->invoice));
+    }
+
+    public function render()
+    {
+        return view('livewire.invoices.create', [
+            'customers' => Customer::all(),
+            'companies' => Company::all(),
+        ]);
     }
 
     protected function rules()
@@ -54,14 +51,15 @@ class Edit extends Component
             'invoice.address' => 'required',
             'invoice.city' => 'required',
             'invoice.company_id' => 'nullable',
-            'invoice.customer_id' => [
-                'required_unless:company_id,null',
-            ],
-            'invoice.date' => 'date',
             'invoice.country' => 'nullable',
+            'invoice.customer_id' => 'nullable',
+            'invoice.date' => [
+                'required',
+                'date',
+            ],
             'invoice.number' => [
                 'required',
-                Rule::unique('invoices', 'number')->ignore($this->invoice),
+                'unique:invoices,number',
             ],
             'invoice.paid' => 'boolean',
             'invoice.zip' => 'required',

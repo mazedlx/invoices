@@ -5,7 +5,7 @@
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
                         <input
-                            wire:model="{{ $model }}"
+                            wire:model.live="{{ $model }}"
                             id="{{ $for }}"
                             name="{{ $for }}"
                             type="checkbox"
