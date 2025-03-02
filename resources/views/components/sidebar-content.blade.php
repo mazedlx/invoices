@@ -8,7 +8,7 @@
             href="{{ route('invoices.index') }}"
             class="flex items-center px-2 py-2 text-sm font-medium @if (request()->routeIs('invoices.*')) bg-gray-900 text-white @else text-gray-300 @endif hover:bg-gray-700 hover:text-white rounded-md group"
         >
-            <x-heroicon-o-document
+            <x-heroicon-o-document-currency-euro
                 class="shrink-0 w-6 h-6 mr-3 @if (request()->routeIs('invoices.*')) text-gray-300 @else text-gray-400 @endif group-hover:text-gray-300"
             />
             Invoices
