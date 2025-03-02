@@ -1,4 +1,4 @@
-<div class="flex items-center shrink-0 h-16 px-4 bg-gray-900">
+<div class="flex items-center h-16 px-4 bg-gray-900 shrink-0">
     <x-fas-money-bill-alt class="w-auto h-8 text-white" />
     <span class="ml-3 text-xl font-semibold text-white">My Invoices</span>
 </div>
