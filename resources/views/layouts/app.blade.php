@@ -13,7 +13,6 @@
         name="csrf-token"
         content="{{ csrf_token() }}"
     >
-    @livewireStyles
 </head>
 
 <body
@@ -36,7 +35,6 @@
     </div>
 
     </div>
-    @livewireScripts
 </body>
 
 </html>
