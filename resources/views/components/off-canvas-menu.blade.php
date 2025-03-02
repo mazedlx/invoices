@@ -14,7 +14,8 @@
     >
         <div
             x-show="showSidebar"
-            class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"
+            class="fixed inset-0 bg-gray-600 bg-opacity-75"
+            aria-hidden="true"
             x-transition:enter="transition ease-in-out duration-300 transform"
             x-transition:enter-start="-translate-x-full"
             x-transition:enter-end="translate-x-0"
@@ -49,7 +50,7 @@
                     class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
                 >
                     <span class="sr-only">Close sidebar</span>
-                    <x-heroicon-o-x class="w-6 h-6 text-white" />
+                    <x-heroicon-s-x-mark class="w-6 h-6 text-white" />
                 </button>
             </div>
 
@@ -57,7 +58,10 @@
         </div>
     </div>
 
-    <div class="shrink-0 w-14" aria-hidden="true">
-    <!-- Dummy element to force sidebar to shrink to fit close icon -->
+    <div
+        class="shrink-0 w-14"
+        aria-hidden="true"
+    >
+        <!-- Dummy element to force sidebar to shrink to fit close icon -->
     </div>
 </div>
