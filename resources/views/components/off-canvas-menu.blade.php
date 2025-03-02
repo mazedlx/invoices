@@ -50,7 +50,7 @@
                     class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
                 >
                     <span class="sr-only">Close sidebar</span>
-                    <x-heroicon-c-x-mark class="w-6 h-6 text-white" />
+                    <x-heroicon-o-x-circle class="w-6 h-6 text-white" />
                 </button>
             </div>
 
