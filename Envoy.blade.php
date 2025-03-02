@@ -8,6 +8,6 @@
     composer install --no-dev
     npm install
     npm run build
-    {{-- php artisan optimize --}}
+    php artisan optimize
     php artisan up
 @endtask
