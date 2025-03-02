@@ -8,13 +8,14 @@ use App\Line;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class InvoiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function guests_cannot_view_invoices()
     {
         $response = $this->get(route('invoices.index'));
@@ -22,7 +23,7 @@ class InvoiceTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    /** @test */
+    #[Test]
     public function users_can_view_invoices()
     {
         $response = $this->actingAs(User::factory()->create())
@@ -31,7 +32,7 @@ class InvoiceTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function user_can_create_invoices()
     {
         Livewire::actingAs(User::factory()->create())->test('invoices.create')->set([
@@ -82,7 +83,7 @@ class InvoiceTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function users_can_update_invoices()
     {
         $invoice = Invoice::factory()->has(
@@ -137,7 +138,7 @@ class InvoiceTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function number_is_required()
     {
         Livewire::test('invoices.create')
@@ -151,7 +152,7 @@ class InvoiceTest extends TestCase
             ->assertHasErrors(['invoice.number']);
     }
 
-    /** @test */
+    #[Test]
     public function address_is_required()
     {
         Livewire::test('invoices.create')
@@ -165,7 +166,7 @@ class InvoiceTest extends TestCase
             ->assertHasErrors(['invoice.address']);
     }
 
-    /** @test */
+    #[Test]
     public function zip_is_required()
     {
         Livewire::test('invoices.create')
@@ -179,7 +180,7 @@ class InvoiceTest extends TestCase
             ->assertHasErrors(['invoice.zip']);
     }
 
-    /** @test */
+    #[Test]
     public function city_is_required()
     {
         Livewire::test('invoices.create')
@@ -193,7 +194,7 @@ class InvoiceTest extends TestCase
             ->assertHasErrors(['invoice.city']);
     }
 
-    /** @test */
+    #[Test]
     public function users_can_delete_invoices()
     {
         $invoice = Invoice::factory()->has(Line::factory()->count(3))->create();

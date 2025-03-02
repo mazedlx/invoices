@@ -4,13 +4,14 @@ namespace Tests\Unit;
 
 use App\Line;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class LineTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_line_can_calculate_its_amount()
     {
         $line = Line::factory()->make(['rate' => 1.2, 'time' => '100']);
@@ -18,7 +19,7 @@ class LineTest extends TestCase
         $this->assertSame(120.0, $line->amount);
     }
 
-    /** @test */
+    #[Test]
     public function a_line_can_retrieve_its_amount_in_euros()
     {
         $line = Line::factory()->make(['rate' => 1.20, 'time' => '100']);
@@ -26,7 +27,7 @@ class LineTest extends TestCase
         $this->assertSame('120,00', $line->amountInEuros);
     }
 
-    /** @test */
+    #[Test]
     public function a_line_can_retrieve_its_time_in_hours()
     {
         $line = Line::factory()->make(['time' => 1.47]);

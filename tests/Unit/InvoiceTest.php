@@ -7,13 +7,14 @@ use App\Customer;
 use App\Invoice;
 use App\Line;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class InvoiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function invoices_have_a_recipient()
     {
         $invoice = Invoice::factory()->for(Customer::factory())->for(Company::factory())->create();
@@ -31,7 +32,7 @@ class InvoiceTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function invoices_can_generate_an_invoice_number()
     {
         Invoice::factory()->create(['date' => '2017-02-01']);
@@ -41,7 +42,7 @@ class InvoiceTest extends TestCase
         $this->assertSame('2017-04', Invoice::generateNumber('2017-08-09 00:00:00'));
     }
 
-    /** @test */
+    #[Test]
     public function invoices_can_calculate_their_amount()
     {
         $invoice = Invoice::factory()

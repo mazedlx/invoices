@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Customer;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CustomerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function guests_cannot_view_customers()
     {
         $response = $this->get(route('customers.index'));
@@ -19,7 +20,7 @@ class CustomerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    /** @test */
+    #[Test]
     public function user_can_view_customers()
     {
         $response = $this->actingAs(User::factory()->create())
@@ -28,7 +29,7 @@ class CustomerTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function user_can_create_customers()
     {
         $this->actingAs(User::factory()->create())
@@ -41,7 +42,7 @@ class CustomerTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function users_can_update_customers()
     {
         $customer = Customer::factory()->create();
@@ -56,7 +57,7 @@ class CustomerTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function name_is_required()
     {
         $response = $this->actingAs(User::factory()->create())

@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Company;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CompanyTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function guests_cannot_show_companies()
     {
         $response = $this->get(route('companies.index'));
@@ -19,7 +20,7 @@ class CompanyTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    /** @test */
+    #[Test]
     public function users_can_view_companies()
     {
         $response = $this->actingAs(User::factory()->create())
@@ -28,7 +29,7 @@ class CompanyTest extends TestCase
         $response->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function users_can_create_companies()
     {
         $this->actingAs(User::factory()->create())
@@ -41,7 +42,7 @@ class CompanyTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function companies_can_be_updated()
     {
         $company = Company::factory()->create(['name' => 'Old Corp.']);
@@ -56,7 +57,7 @@ class CompanyTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function name_is_required()
     {
         $company = Company::factory()->create(['name' => 'Old Corp.']);
